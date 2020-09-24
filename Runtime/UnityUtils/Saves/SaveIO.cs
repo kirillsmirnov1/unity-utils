@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -37,16 +38,23 @@ namespace UnityUtils.Saves
         /// </summary>
         public static string ReadString(string saveFileName, object lockable, bool logSave = false)
         {
-            lock (lockable)
+            try
             {
-                if (!File.Exists(Application.persistentDataPath + "/" + saveFileName)) return null;
-                
-                var file = File.Open(Application.persistentDataPath + saveFileName, FileMode.Open);
-                var str = (string) new BinaryFormatter().Deserialize(file);
-                if(logSave) Debug.Log($"Read string: {str}");
-                file.Close();
-                
-                return str;
+                lock (lockable)
+                {
+                    if (!File.Exists(Application.persistentDataPath + "/" + saveFileName)) return null;
+
+                    var file = File.Open(Application.persistentDataPath + saveFileName, FileMode.Open);
+                    var str = (string) new BinaryFormatter().Deserialize(file);
+                    if (logSave) Debug.Log($"Read string: {str}");
+                    file.Close();
+
+                    return str;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
     }
