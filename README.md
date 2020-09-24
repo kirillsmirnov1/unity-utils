@@ -19,6 +19,6 @@ Separates [`from`, `to`] to `segmentCount` ranges and generates random value in 
 
 ### Saves
 
-Call `DateChecker.CheckSaveDate(DateTime)` to check if any amount of days passed since date in question. If that is so, `DateChecker.LoadOnNewDateCallback` will be invoked.
+Call `DateChecker.CheckSaveDate(DateTime)` to check if any amount of days passed since date in question. If that is so, `DateChecker.LoadOnNewDateCallback` will be invoked. If not — `DateChecker.LoadOnSameDateCallback`.
 
 With `SaveIO` you can write (and read) objects as JSON strings to (from) persistentDataPath.    

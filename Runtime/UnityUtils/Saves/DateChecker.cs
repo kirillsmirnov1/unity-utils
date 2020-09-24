@@ -6,6 +6,7 @@ namespace UnityUtils.Saves
     public static class DateChecker
     {
         public static Action LoadOnNewDateCallback;
+        public static Action LoadOnSameDateCallback;
         
         public static void CheckSaveDate(DateTime saveDate, bool logDaysPassed = false)
         {
@@ -17,6 +18,7 @@ namespace UnityUtils.Saves
             if(logDaysPassed) Debug.Log($"Days passed since save: {daysPassed}");
 
             if(daysPassed) LoadOnNewDateCallback?.Invoke();
+            else LoadOnSameDateCallback?.Invoke();
         }
     }
 }
