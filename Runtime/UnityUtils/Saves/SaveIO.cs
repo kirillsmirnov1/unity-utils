@@ -39,7 +39,7 @@ namespace UnityUtils.Saves
         {
             lock (lockable)
             {
-                if (!File.Exists(Application.persistentDataPath + saveFileName)) return null;
+                if (!File.Exists(Application.persistentDataPath + "/" + saveFileName)) return null;
                 
                 var file = File.Open(Application.persistentDataPath + saveFileName, FileMode.Open);
                 var str = (string) new BinaryFormatter().Deserialize(file);
