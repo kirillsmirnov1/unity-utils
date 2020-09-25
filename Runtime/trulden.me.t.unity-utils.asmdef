@@ -1,3 +1,6 @@
 ﻿{
-	"name": "trulden.me.t.unity-utils"
+	"name": "trulden.me.t.unity-utils",
+	"references": [
+		"Unity.TextMeshPro"
+	]
 }
