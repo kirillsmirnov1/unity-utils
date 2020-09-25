@@ -1,3 +1,6 @@
+# 1.2.0
+- Add `FitCamera`
+
 # 1.1.0
 - Add `SaveIO`
 - Add `DateChecker`
