@@ -11,7 +11,7 @@ namespace UnityUtils
         /// <para>Example usage:</para>
         /// <para>OnValidate() => CheckNullFields(this)</para>
         /// </summary>
-        public static void CheckNullFields(MonoBehaviour obj)
+        public static void CheckNullFields(this MonoBehaviour obj)
         {
             var type = obj.GetType();
             foreach (var field in type.GetRuntimeFields())
