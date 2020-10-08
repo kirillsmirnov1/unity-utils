@@ -1,3 +1,13 @@
+# 1.7.0
+- Add `MonoScale`
+
+# 1.6.0
+- `DebugExtensions` with `DrawCross()` method
+- Turn `CheckNullFields` into extension 
+
+# 1.5.0 
+- Add `EnumExtensions` with `Next()` method
+
 # 1.4.0
 - Add `NamedArray` attribute.
 - Add `InvokableButton`
