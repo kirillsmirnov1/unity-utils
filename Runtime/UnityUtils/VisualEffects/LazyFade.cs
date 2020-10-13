@@ -27,6 +27,11 @@ namespace UnityUtils.VisualEffects
 
         private void Awake()
         {
+            UpdateChildren();
+        }
+
+        public void UpdateChildren()
+        {
             _sr = GetComponentsInChildren<SpriteRenderer>();
             _tmproUi = GetComponentsInChildren<TextMeshProUGUI>();
             _tmpro = GetComponentsInChildren<TextMeshPro>();
