@@ -11,9 +11,8 @@ namespace UnityUtils.Saves
         public static void CheckSaveDate(DateTime saveDate, bool logDaysPassed = false)
         {
             var now = DateTime.Now;
-            
-            var daysPassed = 
-                (now.DayOfYear > saveDate.DayOfYear || now.Year > saveDate.Year);
+
+            bool daysPassed = (now - saveDate).Days >= 1;
             
             if(logDaysPassed) Debug.Log($"Days passed since save: {daysPassed}");
 
