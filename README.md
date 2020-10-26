@@ -4,6 +4,8 @@ Some little pieces of code I find useful enough to have them in several projects
 
 Component to change scale of object with one slider instead of three separate
 
+![](https://raw.githubusercontent.com/kirillsmirnov1/unity-utils/master/img/MonoScale.PNG)
+
 ## VisualEffects
 
 `LazyFade` component fades in and out all child components with Color.             
@@ -11,7 +13,10 @@ Component to change scale of object with one slider instead of three separate
 
 ## Attributes
 
-`NamedArrayAttribute` indexes array elements with given enum values. 
+`NamedArrayAttribute` displays array indexes as given enum values. 
+
+![](https://raw.githubusercontent.com/kirillsmirnov1/unity-utils/master/img/Named_Array_1.PNG)
+![](https://raw.githubusercontent.com/kirillsmirnov1/unity-utils/master/img/NamedArray_0.PNG)
 
 ## UI
 
@@ -22,6 +27,8 @@ Allows to «click» on button from code using `Invoke()`.
 ## Camera
 
 `FitCamera` fits orthographic camera to chosen object in scene by width/height with chosen coefficient. 
+
+![](https://raw.githubusercontent.com/kirillsmirnov1/unity-utils/master/img/FitCamera.PNG)
 
 ## Extensions 
 
