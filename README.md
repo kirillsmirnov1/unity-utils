@@ -2,14 +2,15 @@ Some little pieces of code I find useful enough to have them in several projects
 
 ### MonoScale
 
-Component to change scale of object with one slider instead of three separate
+Component to change scale of object with one slider.
 
 ![](https://raw.githubusercontent.com/kirillsmirnov1/unity-utils/master/img/MonoScale.PNG)
 
 ## VisualEffects
 
-`LazyFade` component fades in and out all child components with Color.             
-`UiFadePanel` is helper component for `LazyFade`. `Show()` sets `LazyFade` child active and calls it's `SetVisibility()`.
+`LazyFade` component fades in and out all child components with Color. You can pass callback to `SetVisibility()` to be called when fade animation is finished.
+             
+`UiFadePanel` is helper component for `LazyFade`. `Show()` sets `LazyFade` child active and calls it's `SetVisibility()`. `Hide()` does the opposite thing. Accepts finish callbacks similar to `LazyFade`.
 
 ## Attributes
 
@@ -29,6 +30,12 @@ Allows to «click» on button from code using `Invoke()`.
 `FitCamera` fits orthographic camera to chosen object in scene by width/height with chosen coefficient. 
 
 ![](https://raw.githubusercontent.com/kirillsmirnov1/unity-utils/master/img/FitCamera.PNG)
+
+## Saves
+
+Call `DateChecker.CheckSaveDate(DateTime)` to check if any amount of days passed since date in question. If that is so, `DateChecker.LoadOnNewDateCallback` will be invoked. If not — `DateChecker.LoadOnSameDateCallback`.
+
+With `SaveIO` you can write (and read) objects as JSON strings to (from) persistentDataPath.  
 
 ## Extensions 
 
@@ -55,10 +62,4 @@ Separates [`from`, `to`] to `segmentCount` ranges and generates random value in 
 
 ### EnumExtensions
 
-`T Next<T>(this T src) where T : Enum` returns next enum element. For last element returns first one.
-
-## Saves
-
-Call `DateChecker.CheckSaveDate(DateTime)` to check if any amount of days passed since date in question. If that is so, `DateChecker.LoadOnNewDateCallback` will be invoked. If not — `DateChecker.LoadOnSameDateCallback`.
-
-With `SaveIO` you can write (and read) objects as JSON strings to (from) persistentDataPath.    
+`T Next<T>(this T src) where T : Enum` returns next enum element. For last element returns first one.  
