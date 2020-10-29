@@ -22,8 +22,9 @@ using UnityEngine;
         {
             _camera = GetComponent<UnityEngine.Camera>();
             _boundsToFit = objectToFit.GetComponent<Renderer>().bounds;
-            Resize();
         }
+
+        private void Start() => Resize();
 
         private void Update()
         {
