@@ -1,10 +1,13 @@
-﻿﻿using UnityEngine;
+﻿﻿using System;
+using UnityEngine;
 
  namespace UnityUtils.Camera
 {
     [RequireComponent(typeof(UnityEngine.Camera))]
     public class FitCamera : MonoBehaviour
     {
+        public static event Action OnCameraResized;
+        
 #pragma warning disable 0649
         [SerializeField] private GameObject objectToFit;
         [SerializeField] private FitType fitType;
@@ -41,6 +44,8 @@
                     _camera.orthographicSize = _boundsToFit.size.y * 0.5f * fitCoefficient;
                     break;
             }
+            
+            OnCameraResized?.Invoke();
         }
     }
 
