@@ -7,7 +7,10 @@ namespace UnityUtils.Saves
     {
         public static Action LoadOnNewDateCallback;
         public static Action LoadOnSameDateCallback;
-        
+
+        public static void CheckSaveDate(long fileTimeUtc, bool logDaysPassed = false) 
+            => CheckSaveDate(DateTime.FromFileTimeUtc(fileTimeUtc), logDaysPassed);
+
         public static void CheckSaveDate(DateTime saveDate, bool logDaysPassed = false)
         {
             var now = DateTime.Now;
