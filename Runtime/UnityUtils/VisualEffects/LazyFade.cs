@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,13 +15,10 @@ namespace UnityUtils.VisualEffects
         protected const int FadeSteps = 10;
         
         private SpriteRenderer[] _sr;
-        private TextMeshProUGUI[] _tmproUi;
-        private TextMeshPro[] _tmpro;
-        private Image[] _images;
+        private Graphic[] _graphic; // Image, Both of TMPro classes
         
         private bool _visibilityCoroutineIsRunning;
         private bool _nextVisibility = true;
-        private bool _currentVisibility;
         private Coroutine _visibilityCoroutine;
 
         private void Awake()
@@ -33,9 +29,7 @@ namespace UnityUtils.VisualEffects
         public void UpdateChildren()
         {
             _sr = GetComponentsInChildren<SpriteRenderer>();
-            _tmproUi = GetComponentsInChildren<TextMeshProUGUI>();
-            _tmpro = GetComponentsInChildren<TextMeshPro>();
-            _images = GetComponentsInChildren<Image>();
+            _graphic = GetComponentsInChildren<Graphic>();
         }
 
         public void SetVisibility(bool visibility, Action finishCallback = null)
@@ -45,11 +39,7 @@ namespace UnityUtils.VisualEffects
                 if(_nextVisibility == visibility) return;
                 StopCoroutine(_visibilityCoroutine);
             }
-            else
-            {
-                if (visibility == _currentVisibility) return;
-            }
-            
+
             _visibilityCoroutine = StartCoroutine(VisibilityCoroutine(visibility, finishCallback));
         }
 
@@ -72,32 +62,17 @@ namespace UnityUtils.VisualEffects
                     c.a = Mathf.Lerp(from, to, deltaStep * i);
                     sr.color = c;
                 }
-
-                foreach (var text in _tmproUi)
-                {
-                    var c = text.color;
-                    c.a = Mathf.Lerp(from, to, deltaStep * i);
-                    text.color = c;
-                }
                 
-                foreach (var text in _tmpro)
+                foreach (var graphic in _graphic)
                 {
-                    var c = text.color;
+                    var c = graphic.color;
                     c.a = Mathf.Lerp(from, to, deltaStep * i);
-                    text.color = c;
-                }
-                
-                foreach (var sr in _images)
-                {
-                    var c = sr.color;
-                    c.a = Mathf.Lerp(from, to, deltaStep * i);
-                    sr.color = c;
+                    graphic.color = c;
                 }
                 
                 yield return new WaitForSeconds(deltaTime);
             }
-
-            _currentVisibility = visibility;
+            
             _visibilityCoroutineIsRunning = false;
             
             finishCallback?.Invoke();
