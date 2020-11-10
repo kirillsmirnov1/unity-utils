@@ -7,6 +7,10 @@ namespace UnityUtils.View
 {
     public class TMProButton : Button
     {
+#pragma warning disable 0649
+        [SerializeField] private bool takeAlphaFromButton;
+#pragma warning restore 0649
+        
         private TextMeshProUGUI[] _text;
         private Color[] _defaultColors;
         protected override void Awake()
@@ -31,7 +35,9 @@ namespace UnityUtils.View
                 interactable = value;
                 for (var i = 0; i < _text.Length; i++)
                 {
-                    _text[i].color = interactable ? _defaultColors[i] : _defaultColors[i] + colorBlock.disabledColor;
+                    var color = interactable ? _defaultColors[i] : _defaultColors[i] + colorBlock.disabledColor;
+                    if (takeAlphaFromButton) color.a = interactable ? colors.normalColor.a : colors.disabledColor.a;
+                    _text[i].color = color;
                 }
             }
         }
