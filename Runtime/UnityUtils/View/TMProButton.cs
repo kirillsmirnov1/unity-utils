@@ -7,10 +7,6 @@ namespace UnityUtils.View
 {
     public class TMProButton : Button
     {
-#pragma warning disable 0649
-        [SerializeField] private bool takeAlphaFromButton;
-#pragma warning restore 0649
-        
         private TextMeshProUGUI[] _text;
         private Color[] _defaultColors;
         protected override void Awake()
