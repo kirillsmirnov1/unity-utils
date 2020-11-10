@@ -6,18 +6,18 @@ namespace UnityUtils.VisualEffects
     public class UiFadePanel : MonoBehaviour
     {
         private LazyFade _fade;
-        private void Awake()
+        protected virtual void Awake()
         {
             _fade = transform.GetChild(0).GetComponent<LazyFade>();
         }
 
-        public void Show(Action finishCallback = null)
+        public virtual void Show(Action finishCallback = null)
         {
             _fade.gameObject.SetActive(true);
             _fade.SetVisibility(true, finishCallback);
         }
 
-        public void Hide(Action finishCallback = null)
+        public virtual void Hide(Action finishCallback = null)
         {
             _fade.SetVisibility(false, () =>
             {
@@ -26,6 +26,6 @@ namespace UnityUtils.VisualEffects
             });
         }
 
-        public void UpdateFade() => _fade.UpdateChildren();
+        public virtual void UpdateFade() => _fade.UpdateChildren();
     }
 }
