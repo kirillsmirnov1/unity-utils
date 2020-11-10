@@ -35,8 +35,7 @@ namespace UnityUtils.View
                 interactable = value;
                 for (var i = 0; i < _text.Length; i++)
                 {
-                    var color = interactable ? _defaultColors[i] : _defaultColors[i] + colorBlock.disabledColor;
-                    if (takeAlphaFromButton) color.a = interactable ? colors.normalColor.a : colors.disabledColor.a;
+                    var color = interactable ? _defaultColors[i] : colorBlock.disabledColor;
                     _text[i].color = color;
                 }
             }
