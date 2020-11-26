@@ -11,8 +11,9 @@ namespace UnityUtils
         /// <para>Example usage:</para>
         /// <para>OnValidate() => CheckNullFields(this)</para>
         /// </summary>
-        public static void CheckNullFields(this MonoBehaviour obj)
+        public static bool CheckNullFields(this MonoBehaviour obj)
         {
+            var noNullFields = true;
             var type = obj.GetType();
             foreach (var field in type.GetRuntimeFields())
             {
@@ -22,9 +23,11 @@ namespace UnityUtils
                     if (val.IsNull())
                     {
                         Debug.LogWarning($"{obj.GetType().Name}: {field.Name} is null");
+                        noNullFields = false;
                     }
                 }
             }
+            return noNullFields;
         }
 
         public static bool IsNull(this object obj) => obj == null || obj.Equals(null);
