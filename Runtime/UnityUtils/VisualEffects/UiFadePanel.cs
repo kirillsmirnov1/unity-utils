@@ -11,13 +11,17 @@ namespace UnityUtils.VisualEffects
             _fade = transform.GetChild(0).GetComponent<LazyFade>();
         }
 
-        public virtual void Show(Action finishCallback = null)
+        public virtual void Show() => Show(null);
+        
+        public virtual void Show(Action finishCallback)
         {
             _fade.gameObject.SetActive(true);
             _fade.SetVisibility(true, finishCallback);
         }
 
-        public virtual void Hide(Action finishCallback = null)
+        public virtual void Hide() => Hide(null);
+
+        public virtual void Hide(Action finishCallback)
         {
             _fade.SetVisibility(false, () =>
             {
