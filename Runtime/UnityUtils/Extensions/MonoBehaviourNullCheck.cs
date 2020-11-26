@@ -30,6 +30,9 @@ namespace UnityUtils
             return noNullFields;
         }
 
+        public static bool CheckNullFieldsIfNotPrefab(this MonoBehaviour obj)
+            => obj.gameObject.InPrefabScene() || CheckNullFields(obj);
+
         public static bool IsNull(this object obj) => obj == null || obj.Equals(null);
     }
 }
