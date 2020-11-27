@@ -16,5 +16,17 @@ namespace UnityUtils
 
             return Random.Range(min, max);
         }
+
+        public static Vector3 NextVector(this System.Random rand, Vector3 from, Vector3 to) 
+            => new Vector3(
+                rand.NextFloat(from.x, to.x),
+                rand.NextFloat(from.y, to.y),
+                rand.NextFloat(from.z, to.z)
+            );
+
+        public static float NextFloat(this System.Random rand, float from, float to) 
+            => Mathf.Lerp(from, to, rand.NextFloat());
+
+        public static float NextFloat(this System.Random rand) => (float) rand.NextDouble();
     }
 }
