@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace UnityUtils.VisualEffects
@@ -31,5 +32,15 @@ namespace UnityUtils.VisualEffects
         }
 
         public virtual void UpdateFade() => _fade.UpdateChildren();
+
+        public void ShowAndHide(float showtime = 1f) 
+            => StartCoroutine(ShowAndHideCoroutine(showtime));
+
+        private IEnumerator ShowAndHideCoroutine(float showtime)
+        {
+            Show();
+            yield return new WaitForSeconds(showtime);
+            Hide();
+        }
     }
 }
