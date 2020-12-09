@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Packages.UnityUtils.Extensions
+namespace UnityUtils.Extensions
 {
     public class MathExtensions
     {
