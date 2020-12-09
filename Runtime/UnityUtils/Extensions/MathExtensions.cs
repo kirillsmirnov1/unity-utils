@@ -2,7 +2,7 @@
 
 namespace UnityUtils.Extensions
 {
-    public class MathExtensions
+    public static class MathExtensions
     {
         public static Vector2 RadianToVector2(float radian)
         {
