@@ -33,14 +33,16 @@ namespace UnityUtils.VisualEffects
 
         public virtual void UpdateFade() => _fade.UpdateChildren();
 
-        public void ShowAndHide(float showtime = 1f) 
-            => StartCoroutine(ShowAndHideCoroutine(showtime));
+        public void ShowAndHide(float showTime = 1f) => ShowAndHide(null, showTime);
+        
+        public void ShowAndHide(Action finishCallback, float showtime = 1f) 
+            => StartCoroutine(ShowAndHideCoroutine(finishCallback, showtime));
 
-        private IEnumerator ShowAndHideCoroutine(float showtime)
+        private IEnumerator ShowAndHideCoroutine(Action finishCallback, float showtime)
         {
             Show();
             yield return new WaitForSeconds(showtime);
-            Hide();
+            Hide(finishCallback);
         }
     }
 }
