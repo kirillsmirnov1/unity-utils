@@ -1,11 +1,10 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using UnityUtils.Events;
 
-namespace Packages.Editor.UnityUtils.Events
+namespace UnityUtils.Events
 {
     [CustomEditor(typeof(IntGameEvent))]
-    public class IntGameEventEditor : UnityEditor.Editor
+    public class IntGameEventEditor : Editor
     {
         private string _input = "0";
         

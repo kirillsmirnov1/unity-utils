@@ -1,11 +1,10 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using UnityUtils.Events;
 
-namespace Packages.Editor.UnityUtils.Events
+namespace UnityUtils.Events
 {
     [CustomEditor(typeof(GameEvent))]
-    public class GameEventEditor : UnityEditor.Editor
+    public class GameEventEditor : Editor
     {
         public override void OnInspectorGUI()
         {
