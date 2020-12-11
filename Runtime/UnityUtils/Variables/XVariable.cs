@@ -4,7 +4,7 @@ using UnityEngine;
 namespace UnityUtils.Variables
 {
     // [CreateAssetMenu(fileName = "New X Variable", menuName = "Variables/X Variable", order = 0)]
-    public abstract class XVariable<T>: ScriptableObject
+    public abstract class XVariable<T> : ScriptableObject
     {
         public event Action<T> OnChange;
         
@@ -12,7 +12,7 @@ namespace UnityUtils.Variables
         [SerializeField] private T value;
 #pragma warning restore 0649
 
-        private void OnValidate() => OnChange?.Invoke(value);
+        protected virtual void OnValidate() => OnChange?.Invoke(value);
 
         public T Value
         {

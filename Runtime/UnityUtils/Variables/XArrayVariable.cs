@@ -8,8 +8,17 @@ namespace UnityUtils.Variables
         /// <summary>
         /// index, new value
         /// </summary>
-        public Action<int, T> OnEntryChange;
-        
+        public event Action<int, T> OnEntryChange;
+
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            for (var i = 0; i < Value.Length; i++)
+            {
+                OnEntryChange?.Invoke(i, Value[i]);
+            }
+        }
+
         public T this[int i]
         {
             get => Value[i];
