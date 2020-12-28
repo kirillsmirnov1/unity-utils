@@ -11,7 +11,7 @@ namespace UnityUtils
         /// <para>Example usage:</para>
         /// <para>OnValidate() => CheckNullFields(this)</para>
         /// </summary>
-        private static bool CheckNullFields(this UnityEngine.Object obj)
+        private static bool CheckNullFieldsImpl(this UnityEngine.Object obj)
         {
             var noNullFields = true;
             var type = obj.GetType();
@@ -30,8 +30,8 @@ namespace UnityUtils
             return noNullFields;
         }
 
-        public static bool CheckNullFields(this MonoBehaviour obj) => CheckNullFields(obj);
-        public static bool CheckNullFields(this ScriptableObject obj) => CheckNullFields(obj);
+        public static bool CheckNullFields(this MonoBehaviour obj) => CheckNullFieldsImpl(obj);
+        public static bool CheckNullFields(this ScriptableObject obj) => CheckNullFieldsImpl(obj);
 
         public static bool CheckNullFieldsIfNotPrefab(this MonoBehaviour obj)
             => obj.gameObject.InPrefabScene() || CheckNullFields(obj);
