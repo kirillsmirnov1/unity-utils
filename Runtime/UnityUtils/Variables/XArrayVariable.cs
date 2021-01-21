@@ -19,6 +19,8 @@ namespace UnityUtils.Variables
             }
         }
 
+        public int Length => Value.Length;
+        
         public T this[int i]
         {
             get => Value[i];
