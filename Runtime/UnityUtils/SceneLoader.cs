@@ -9,6 +9,6 @@ namespace UnityUtils
         [SerializeField] private int sceneIndex;
 #pragma warning restore 0649
 
-        public void Load() => SceneManager.LoadScene(sceneIndex);
+        public virtual void Load() => SceneManager.LoadScene(sceneIndex);
     }
 }
