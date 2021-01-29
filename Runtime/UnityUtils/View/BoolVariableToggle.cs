@@ -4,10 +4,10 @@ using UnityUtils.Variables;
 
 namespace UnityUtils.View
 {
-    public class VolumeToggle : MonoBehaviour
+    public class BoolVariableToggle : MonoBehaviour
     {
 #pragma warning disable 0649
-        [SerializeField] private BoolVariable soundIsOn;
+        [SerializeField] private BoolVariable variable;
         [SerializeField] private Toggle toggle;
         [SerializeField] private Image background;
 #pragma warning restore 0649
@@ -15,16 +15,16 @@ namespace UnityUtils.View
         private void Awake()
         {
             toggle.onValueChanged.AddListener(OnToggleValueChange);
-            soundIsOn.OnChange += SetToggleValue;
+            variable.OnChange += SetToggleValue;
         }
 
         private void OnDestroy()
         {
             toggle.onValueChanged.RemoveListener(OnToggleValueChange);
-            soundIsOn.OnChange -= SetToggleValue;
+            variable.OnChange -= SetToggleValue;
         }
 
-        private void Start() => SetToggleValue(soundIsOn);
+        private void Start() => SetToggleValue(variable);
 
         private void SetToggleValue(bool newValue)
         {
@@ -35,9 +35,9 @@ namespace UnityUtils.View
 
         private void OnToggleValueChange(bool newValue)
         {
-            if(newValue == soundIsOn) return;
+            if(newValue == variable) return;
             background.enabled = !newValue;
-            soundIsOn.Value = newValue;
+            variable.Value = newValue;
         }
     }
 }
