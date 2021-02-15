@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityUtils.Saves;
 
@@ -18,6 +18,7 @@ namespace UnityUtils.Variables
 #pragma warning restore 0649
         
         private readonly object _lockable = new object();
+        [NonSerialized] private bool _initiated;
 
         private string SaveFileName => GetInstanceID().ToString();
         
@@ -38,7 +39,15 @@ namespace UnityUtils.Variables
 
         public T Value
         {
-            get => value;
+            get
+            {
+                if (!_initiated)
+                {
+                    ReadSave();
+                    _initiated = true;
+                }
+                return value;
+            }
             set
             {
                 if(value.Equals(this.value)) return;
