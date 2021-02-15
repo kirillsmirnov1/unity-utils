@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityUtils.Saves;
 
@@ -24,17 +24,8 @@ namespace UnityUtils.Variables
         
         protected virtual void OnValidate()
         {
-            OnChange?.Invoke(value);
-            if (save) WriteSave();
-        }
-
-        private void Awake()
-        {
-            Debug.Log("In SO awake");
-            if (save)
-            {
-                ReadSave(); // TODO check on first get attempt if inited 
-            }
+            if(!Application.isPlaying) return;
+            OnDataChanged();
         }
 
         public T Value
@@ -52,9 +43,14 @@ namespace UnityUtils.Variables
             {
                 if(value.Equals(this.value)) return;
                 this.value = value;
-                OnChange?.Invoke(this.value);
-                if (save) WriteSave();
+                OnDataChanged();
             }
+        }
+
+        private void OnDataChanged()
+        {
+            OnChange?.Invoke(value);
+            if (save) WriteSave();
         }
 
         public static implicit operator T(XVariable<T> v) => v.Value;
@@ -63,11 +59,28 @@ namespace UnityUtils.Variables
 
         private void ReadSave()
         {
-            var data = SaveIO.ReadObjectAsJsonString<T>(SaveFileName, _lockable, logSave);
-            if (data.IsNull()) return;
+            var str = SaveIO.ReadString(SaveFileName, _lockable, logSave);
+            if (str.IsNull())
+            {
+                WriteSave();
+                return;
+            }
+            
+            var data = typeof(T).IsPrimitive 
+                ? (T)Convert.ChangeType(str, typeof(T)) 
+                : JsonUtility.FromJson<T>(str);
+            
             Value = data;
         }
 
-        private void WriteSave() => SaveIO.WriteObjectAsJsonString(Value, SaveFileName, _lockable, logSave); // FIXME writes {}
+        private void WriteSave() 
+            => SaveIO.WriteString(
+                SaveFileName, 
+                typeof(T).IsPrimitive 
+                    ? Value.ToString() 
+                    : JsonUtility.ToJson(Value), 
+                _lockable, 
+                logSave);
     }
+
 }
