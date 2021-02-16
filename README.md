@@ -3,6 +3,9 @@ Some little pieces of code I find useful enough to have them in several projects
 To install add next line to `Packages/manifest.json`   
 `"trulden.unity-utils": "https://github.com/kirillsmirnov1/unity-utils.git",`
 
+Depends on:  
+`"com.domybest.mybox": "https://github.com/Deadcows/MyBox.git",`
+
 ### MonoScale
 
 Component to change scale of object with one slider.

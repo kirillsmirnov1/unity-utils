@@ -1,4 +1,5 @@
 ﻿using System;
+using MyBox;
 using UnityEngine;
 using UnityUtils.Saves;
 
@@ -11,11 +12,11 @@ namespace UnityUtils.Variables
 
 #pragma warning disable 0649
         [SerializeField] protected T value;
-
-        [Header("Save")] 
+        
+        [Header("")]
         [SerializeField] protected bool save;
-        [SerializeField] protected bool logSave;
-        [SerializeField] private XVariable<T> defaultValue;
+        [SerializeField] [ConditionalField("save")] protected bool logSave;
+        [SerializeField] [ConditionalField("save")] private XVariable<T> defaultValue;
 #pragma warning restore 0649
 
         private readonly object _lockable = new object();

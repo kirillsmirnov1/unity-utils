@@ -1,7 +1,9 @@
 {
     "name": "trulden.unity-utils.runtime",
+    "rootNamespace": "",
     "references": [
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "MyBox"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
