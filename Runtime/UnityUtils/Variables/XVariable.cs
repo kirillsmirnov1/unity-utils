@@ -10,7 +10,7 @@ namespace UnityUtils.Variables
         public event Action<T> OnChange;
 
 #pragma warning disable 0649
-        [SerializeField] private T value;
+        [SerializeField] protected T value;
 
         [Header("Save")] [SerializeField] protected bool save;
         [SerializeField] protected bool logSave;
@@ -36,7 +36,7 @@ namespace UnityUtils.Variables
             }
         }
 
-        private void OnDataChanged()
+        protected void OnDataChanged()
         {
             OnChange?.Invoke(value);
             if (save) WriteSave();
@@ -64,7 +64,7 @@ namespace UnityUtils.Variables
             Value = data;
         }
 
-        private void WriteSave()
+        protected void WriteSave()
             => SaveIO.WriteString(
                 SaveFileName,
                 typeof(T).IsPrimitive

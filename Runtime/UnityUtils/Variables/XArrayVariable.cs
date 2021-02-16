@@ -1,9 +1,11 @@
 ﻿using System;
+using UnityEngine;
+using UnityUtils.Extensions;
 
 namespace UnityUtils.Variables
 {
     // [CreateAssetMenu(fileName = "New X Array Variable", menuName = "Variables/X Array Variable", order = 0)]
-    public abstract class XArrayVariable<T> : XVariable<T[]>
+    public abstract class XArrayVariable<T> : XVariable<ArrayWrap<T>>
     {
         /// <summary>
         /// index, new value
@@ -12,10 +14,22 @@ namespace UnityUtils.Variables
 
         protected override void OnValidate()
         {
+            if (!Application.isPlaying) return;
             base.OnValidate();
-            for (var i = 0; i < Value.Length; i++)
+            for (var i = 0; i < Length; i++)
             {
                 OnEntryChange?.Invoke(i, Value[i]);
+            }
+            WriteSave();
+        }
+
+        public new T[] Value { 
+            get => value.data;
+            set
+            {
+                if (value.Equals(this.value.data)) return;
+                this.value.data = value;
+                OnDataChanged();   
             }
         }
 
@@ -29,6 +43,7 @@ namespace UnityUtils.Variables
                 if(Value[i].Equals(value)) return;
                 Value[i] = value;
                 OnEntryChange?.Invoke(i, value);
+                WriteSave();
             }
         }
     }
