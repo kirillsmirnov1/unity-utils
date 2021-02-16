@@ -5,43 +5,32 @@ using UnityUtils.Saves;
 namespace UnityUtils.Variables
 {
     // [CreateAssetMenu(fileName = "New X Variable", menuName = "Variables/X Variable", order = 0)]
-    public abstract class XVariable<T> : ScriptableObject
+    public abstract class XVariable<T> : SaveVariable
     {
         public event Action<T> OnChange;
-        
+
 #pragma warning disable 0649
         [SerializeField] private T value;
-        
-        [Header("Save")]
-        [SerializeField] protected bool save;
+
+        [Header("Save")] [SerializeField] protected bool save;
         [SerializeField] protected bool logSave;
 #pragma warning restore 0649
-        
-        private readonly object _lockable = new object();
-        [NonSerialized] private bool _initiated;
 
+        private readonly object _lockable = new object();
         private string SaveFileName => GetInstanceID().ToString();
-        
+
         protected virtual void OnValidate()
         {
-            if(!Application.isPlaying) return;
+            if (!Application.isPlaying) return;
             OnDataChanged();
         }
 
         public T Value
         {
-            get
-            {
-                if (!_initiated)
-                {
-                    ReadSave();
-                    _initiated = true;
-                }
-                return value;
-            }
+            get => value;
             set
             {
-                if(value.Equals(this.value)) return;
+                if (value.Equals(this.value)) return;
                 this.value = value;
                 OnDataChanged();
             }
@@ -56,31 +45,34 @@ namespace UnityUtils.Variables
         public static implicit operator T(XVariable<T> v) => v.Value;
         public override string ToString() => Value.ToString();
 
+        #region SaveVariable
 
-        private void ReadSave()
+        public override void ReadSave()
         {
             var str = SaveIO.ReadString(SaveFileName, _lockable, logSave);
+
             if (str.IsNull())
             {
                 WriteSave();
                 return;
             }
-            
-            var data = typeof(T).IsPrimitive 
-                ? (T)Convert.ChangeType(str, typeof(T)) 
+
+            var data = typeof(T).IsPrimitive
+                ? (T) Convert.ChangeType(str, typeof(T))
                 : JsonUtility.FromJson<T>(str);
-            
+
             Value = data;
         }
 
-        private void WriteSave() 
+        private void WriteSave()
             => SaveIO.WriteString(
-                SaveFileName, 
-                typeof(T).IsPrimitive 
-                    ? Value.ToString() 
-                    : JsonUtility.ToJson(Value), 
-                _lockable, 
+                SaveFileName,
+                typeof(T).IsPrimitive
+                    ? Value.ToString()
+                    : JsonUtility.ToJson(Value),
+                _lockable,
                 logSave);
-    }
 
+        #endregion
+    }
 }
