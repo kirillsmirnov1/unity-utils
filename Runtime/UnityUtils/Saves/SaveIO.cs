@@ -44,7 +44,7 @@ namespace UnityUtils.Saves
                 {
                     if (!File.Exists(Application.persistentDataPath + "/" + saveFileName)) return null;
 
-                    var file = File.Open(Application.persistentDataPath + saveFileName, FileMode.Open);
+                    var file = File.Open(Application.persistentDataPath + "/" + saveFileName, FileMode.Open);
                     var str = (string) new BinaryFormatter().Deserialize(file);
                     if (logSave) Debug.Log($"Read string: {str}");
                     file.Close();
