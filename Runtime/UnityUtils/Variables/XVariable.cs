@@ -12,8 +12,10 @@ namespace UnityUtils.Variables
 #pragma warning disable 0649
         [SerializeField] protected T value;
 
-        [Header("Save")] [SerializeField] protected bool save;
+        [Header("Save")] 
+        [SerializeField] protected bool save;
         [SerializeField] protected bool logSave;
+        [SerializeField] private XVariable<T> defaultValue;
 #pragma warning restore 0649
 
         private readonly object _lockable = new object();
@@ -53,6 +55,7 @@ namespace UnityUtils.Variables
 
             if (str.IsNull())
             {
+                value = defaultValue;
                 WriteSave();
                 return;
             }
