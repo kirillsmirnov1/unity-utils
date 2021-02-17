@@ -33,7 +33,7 @@ namespace UnityUtils.Variables
             }
         }
 
-        public int Length => Value.Length;
+        public int Length => Value?.Length ?? 0;
         
         public T this[int i]
         {
