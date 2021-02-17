@@ -21,7 +21,7 @@ namespace UnityUtils.Saves
             lock (lockable)
             {
                 var file = File.Create(Application.persistentDataPath + "/" + saveFileName);
-                if(logSave) Debug.Log($"Writing string: {str}");
+                if(logSave) Debug.Log($"Writing file: {saveFileName} string: {str}");
                 new BinaryFormatter().Serialize(file, str);
                 file.Close();
             }
@@ -46,7 +46,7 @@ namespace UnityUtils.Saves
 
                     var file = File.Open(Application.persistentDataPath + "/" + saveFileName, FileMode.Open);
                     var str = (string) new BinaryFormatter().Deserialize(file);
-                    if (logSave) Debug.Log($"Read string: {str}");
+                    if (logSave) Debug.Log($"Read file: {saveFileName} string: {str}");
                     file.Close();
 
                     return str;
