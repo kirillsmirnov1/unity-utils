@@ -15,12 +15,13 @@ namespace UnityUtils.Variables
         public event Action<T> OnChange;
 
 #pragma warning disable 0649
-        [SerializeField] protected T value;
-        
-        [Header("")]
+        [Header("Saving")]
         [SerializeField] protected bool save;
         [SerializeField] [ConditionalField("save")] protected bool logSave;
         [SerializeField] [ConditionalField("save")] private XVariable<T> defaultValue;
+        
+        [Header("Data")]
+        [SerializeField] protected T value;
 #pragma warning restore 0649
 
         private readonly object _lockable = new object();
