@@ -11,17 +11,22 @@ namespace UnityUtils.Variables
         /// index, new value
         /// </summary>
         public event Action<int, T> OnEntryChange;
-
+        
+#if UNITY_EDITOR
         protected override void OnValidate()
         {
-            if (!Application.isPlaying) return;
             base.OnValidate();
-            for (var i = 0; i < Length; i++)
+            if (Application.isPlaying)
             {
-                OnEntryChange?.Invoke(i, Value[i]);
+                for (var i = 0; i < Length; i++)
+                {
+                    OnEntryChange?.Invoke(i, Value[i]);
+                }
+
+                if(save) WriteSave();
             }
-            WriteSave();
         }
+#endif
 
         public new T[] Value { 
             get => value.data;

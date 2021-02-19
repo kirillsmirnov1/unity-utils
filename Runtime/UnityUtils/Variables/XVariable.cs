@@ -3,6 +3,10 @@ using MyBox;
 using UnityEngine;
 using UnityUtils.Saves;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace UnityUtils.Variables
 {
     // [CreateAssetMenu(fileName = "New X Variable", menuName = "Variables/X Variable", order = 0)]
@@ -20,13 +24,17 @@ namespace UnityUtils.Variables
 #pragma warning restore 0649
 
         private readonly object _lockable = new object();
-        private string SaveFileName => GetInstanceID().ToString();
+        private string SaveFileName => guid;
 
+        [SerializeField, HideInInspector] private string guid;
+
+#if UNITY_EDITOR
         protected virtual void OnValidate()
         {
-            if (!Application.isPlaying) return;
-            OnDataChanged();
+            guid = AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(this)).ToString();
+            if (Application.isPlaying) OnDataChanged();
         }
+#endif
 
         public T Value
         {
