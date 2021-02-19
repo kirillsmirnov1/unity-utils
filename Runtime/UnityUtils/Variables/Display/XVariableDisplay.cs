@@ -14,13 +14,13 @@ using UnityEngine;
 
         private TextMeshProUGUI _text;
         
-        private void OnEnable()
+        private void Awake()
         {
             _text = GetComponentInChildren<TextMeshProUGUI>();
             Variable.OnChange += OnChange;
         }
 
-        private void OnDisable() => Variable.OnChange -= OnChange;
+        private void OnDestroy() => Variable.OnChange -= OnChange;
 
         private void Start() => SetText(Variable);
 
