@@ -16,6 +16,7 @@ namespace UnityUtils.UI
             Text = GetComponentInChildren<TextMeshProUGUI>();
             Button = GetComponent<Button>();
             ButtonColors = Button.colors;
+            SetInteractable(Button.interactable);
         }
 
         public virtual void SetInteractable(bool interactable)
