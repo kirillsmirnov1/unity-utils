@@ -6,39 +6,39 @@ namespace UnityUtils.VisualEffects
 {
     public class UiFadePanel : MonoBehaviour
     {
-        private LazyFade _fade;
+        protected LazyFade Fade;
         protected virtual void Awake()
         {
-            _fade = transform.GetChild(0).GetComponent<LazyFade>();
+            Fade = transform.GetChild(0).GetComponent<LazyFade>();
         }
 
         public virtual void Show() => Show(null);
         
         public virtual void Show(Action finishCallback)
         {
-            _fade.gameObject.SetActive(true);
-            _fade.SetVisibility(true, finishCallback);
+            Fade.gameObject.SetActive(true);
+            Fade.SetVisibility(true, finishCallback);
         }
 
         public virtual void Hide() => Hide(null);
 
         public virtual void Hide(Action finishCallback)
         {
-            _fade.SetVisibility(false, () =>
+            Fade.SetVisibility(false, () =>
             {
-                _fade.gameObject.SetActive(false);
+                Fade.gameObject.SetActive(false);
                 finishCallback?.Invoke();
             });
         }
 
-        public virtual void UpdateFade() => _fade.UpdateChildren();
+        public virtual void UpdateFade() => Fade.UpdateChildren();
 
-        public void ShowAndHide(float showTime = 1f) => ShowAndHide(null, showTime);
+        public virtual void ShowAndHide(float showTime = 1f) => ShowAndHide(null, showTime);
         
-        public void ShowAndHide(Action finishCallback, float showtime = 1f) 
+        public virtual void ShowAndHide(Action finishCallback, float showtime = 1f) 
             => StartCoroutine(ShowAndHideCoroutine(finishCallback, showtime));
 
-        private IEnumerator ShowAndHideCoroutine(Action finishCallback, float showtime)
+        protected virtual IEnumerator ShowAndHideCoroutine(Action finishCallback, float showtime)
         {
             Show();
             yield return new WaitForSeconds(showtime);
