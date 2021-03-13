@@ -1,5 +1,5 @@
 ﻿using System;
-using MyBox;
+using UnityUtils.Attributes;
 using UnityEngine;
 using UnityUtils.Saves;
 
@@ -13,7 +13,7 @@ namespace UnityUtils.Variables
 #pragma warning disable 0649
         [SerializeField] protected T value;
         
-        [Header("")]
+        [Separator("Save")]
         [SerializeField] protected bool save;
         [SerializeField] [ConditionalField("save")] protected bool logSave;
         [SerializeField] [ConditionalField("save")] private XVariable<T> defaultValue;
