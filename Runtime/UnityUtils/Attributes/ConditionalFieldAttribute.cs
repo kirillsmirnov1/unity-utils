@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UnityUtils.Attributes
 {
-    
+    // Taken from https://github.com/Deadcows/MyBox
     
     /// <summary>
     /// Conditionally Show/Hide field in inspector, based on some other field value 
