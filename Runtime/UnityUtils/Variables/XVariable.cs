@@ -15,7 +15,6 @@ namespace UnityUtils.Variables
         public event Action<T> OnChange;
 
 #pragma warning disable 0649
-        [Header("Saving")]
         [SerializeField] protected T value;
         
         [Separator("Save")]
