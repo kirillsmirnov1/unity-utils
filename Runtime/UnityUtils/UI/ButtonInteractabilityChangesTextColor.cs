@@ -10,19 +10,34 @@ namespace UnityUtils.UI
         protected TextMeshProUGUI Text;
         protected Button Button;
         protected ColorBlock ButtonColors;
+
+        protected bool Initiated;
+
+        public bool interactable
+        {
+            get => Button.interactable;
+            set => SetInteractable(value);
+        }
         
         protected virtual void Awake()
+        {
+            Init();
+            SetInteractable(Button.interactable);
+        }
+
+        protected virtual void Init()
         {
             Text = GetComponentInChildren<TextMeshProUGUI>();
             Button = GetComponent<Button>();
             ButtonColors = Button.colors;
-            SetInteractable(Button.interactable);
+            Initiated = true;
         }
 
-        public virtual void SetInteractable(bool interactable)
+        public virtual void SetInteractable(bool newStatus)
         {
-            Button.interactable = interactable;
-            Text.color = interactable ? ButtonColors.normalColor : ButtonColors.disabledColor;
+            if(!Initiated) Init();
+            Button.interactable = newStatus;
+            Text.color = newStatus ? ButtonColors.normalColor : ButtonColors.disabledColor;
         } 
     }
 }
