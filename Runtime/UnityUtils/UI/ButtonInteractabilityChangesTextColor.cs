@@ -33,11 +33,11 @@ namespace UnityUtils.UI
             Initiated = true;
         }
 
-        public virtual void SetInteractable(bool newStatus)
+        public virtual void SetInteractable(bool newInteractableValue)
         {
             if(!Initiated) Init();
-            Button.interactable = newStatus;
-            Text.color = newStatus ? ButtonColors.normalColor : ButtonColors.disabledColor;
+            Button.interactable = newInteractableValue;
+            Text.color = newInteractableValue ? ButtonColors.normalColor : ButtonColors.disabledColor;
         } 
     }
 }
