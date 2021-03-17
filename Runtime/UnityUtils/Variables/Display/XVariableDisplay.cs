@@ -6,23 +6,22 @@ using UnityEngine;
     public abstract class XVariableDisplay <T> : MonoBehaviour
     {
 #pragma warning disable 0649
+        [SerializeField] protected XVariable<T> variable;
         [SerializeField] private string prefix;
         [SerializeField] private string postfix;
 #pragma warning restore 0649
         
-        protected abstract XVariable<T> Variable { get; }
-
         private TextMeshProUGUI _text;
         
         private void Awake()
         {
             _text = GetComponentInChildren<TextMeshProUGUI>();
-            Variable.OnChange += OnChange;
+            variable.OnChange += OnChange;
         }
 
-        private void OnDestroy() => Variable.OnChange -= OnChange;
+        private void OnDestroy() => variable.OnChange -= OnChange;
 
-        private void Start() => SetText(Variable);
+        private void Start() => SetText(variable);
 
         private void SetText(T val) => _text.text = prefix + val.ToString() + postfix;
 
