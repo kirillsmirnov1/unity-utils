@@ -10,6 +10,7 @@ namespace UnityUtils.UI
         protected TextMeshProUGUI Text;
         protected Button Button;
         protected ColorBlock ButtonColors;
+        protected Color DefaultTextColor;
 
         protected bool Initiated;
 
@@ -28,6 +29,7 @@ namespace UnityUtils.UI
         protected virtual void Init()
         {
             Text = GetComponentInChildren<TextMeshProUGUI>();
+            DefaultTextColor = Text.color;
             Button = GetComponent<Button>();
             ButtonColors = Button.colors;
             Initiated = true;
@@ -37,7 +39,7 @@ namespace UnityUtils.UI
         {
             if(!Initiated) Init();
             Button.interactable = newInteractableValue;
-            Text.color = newInteractableValue ? ButtonColors.normalColor : ButtonColors.disabledColor;
+            Text.color = newInteractableValue ? DefaultTextColor : ButtonColors.disabledColor;
         } 
     }
 }
