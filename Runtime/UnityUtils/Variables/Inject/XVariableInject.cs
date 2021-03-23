@@ -8,5 +8,6 @@ namespace UnityUtils.Variables.Inject
         // Works where T : UnityEngine.Component
         // Needs to be overriden for other cases
         protected override void InjectValue() => variable.Value = GetComponent<T>();
+        protected override void ClearValue() => variable.Value = default;
     }
 }

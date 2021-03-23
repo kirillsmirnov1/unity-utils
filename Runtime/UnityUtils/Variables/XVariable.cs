@@ -41,11 +41,15 @@ namespace UnityUtils.Variables
             get => value;
             set
             {
-                if (value.Equals(this.value)) return;
+                if (SameValue(value)) return;
                 this.value = value;
                 OnDataChanged();
             }
         }
+
+        private bool SameValue(T newValue) 
+            => newValue == null && this.value == null 
+               || newValue != null && newValue.Equals(this.value);
 
         protected void OnDataChanged()
         {

@@ -6,6 +6,8 @@ namespace UnityUtils.Variables.Inject
     public abstract class XVariableInjectRoot : MonoBehaviour
     {
         protected virtual void Awake() => InjectValue();
+        protected void OnDestroy() => ClearValue();
         protected abstract void InjectValue();
+        protected abstract void ClearValue();
     }
 }
