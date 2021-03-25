@@ -13,5 +13,21 @@ namespace UnityUtils.Extensions
         {
             return RadianToVector2(degree * Mathf.Deg2Rad);
         }
+
+        /// <summary>
+        /// Counts full circle counter clock wise from (1, 0)
+        /// </summary>
+        public static float ToAngleInDegrees(this Vector2 v)
+        {
+            var angle = Vector2.Angle(Vector2.right, v);
+            if (v.y < 0) angle = 360 - angle;
+            return angle;
+        }
+        
+        /// <summary>
+        /// Counts full circle counter clock wise from (1, 0)
+        /// </summary>
+        public static float ToAngleInRadians(this Vector2 v) 
+            => ToAngleInDegrees(v) * Mathf.Deg2Rad;
     }
 }
