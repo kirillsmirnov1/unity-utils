@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-namespace UnityUtils.Variables.Inject
+namespace UnityUtils.Variables.Binding
 {
-    public class XVariableInject<T> : XVariableInjectRoot
+    public class XVariableBinding<T> : XVariableBindingRoot
     {
         [SerializeField] protected XVariable<T> variable;
         // Works where T : UnityEngine.Component
         // Needs to be overriden for other cases
-        protected override void InjectValue() => variable.Value = GetComponent<T>();
+        protected override void BindValue() => variable.Value = GetComponent<T>();
         protected override void ClearValue() => variable.Value = default;
     }
 }
