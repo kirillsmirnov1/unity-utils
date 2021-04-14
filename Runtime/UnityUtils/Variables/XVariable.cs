@@ -20,7 +20,7 @@ namespace UnityUtils.Variables
         [Separator("Save")]
         [SerializeField] protected bool save;
         [SerializeField] [ConditionalField("save")] protected bool logSave;
-        [SerializeField] [ConditionalField("save")] private XVariable<T> defaultValue;
+        [SerializeField] [ConditionalField("save")] protected XVariable<T> defaultValue;
 #pragma warning restore 0649
 
         private readonly object _lockable = new object();
