@@ -6,32 +6,44 @@ namespace UnityUtils.VisualEffects
 {
     public class UiFadePanel : MonoBehaviour
     {
-        protected LazyFade Fade;
-        protected virtual void Awake()
+        [SerializeField] protected LazyFade[] fades;
+        protected virtual void OnValidate()
         {
-            Fade = transform.GetChild(0).GetComponent<LazyFade>();
+            fades = GetComponentsInChildren<LazyFade>(true);
         }
 
         public virtual void Show() => Show(null);
         
         public virtual void Show(Action finishCallback)
         {
-            Fade.gameObject.SetActive(true);
-            Fade.SetVisibility(true, finishCallback);
+            foreach (var fade in fades)
+            {
+                fade.gameObject.SetActive(true);
+                fade.SetVisibility(true, finishCallback);
+            }
         }
 
         public virtual void Hide() => Hide(null);
 
         public virtual void Hide(Action finishCallback)
         {
-            Fade.SetVisibility(false, () =>
+            foreach (var fade in fades)
             {
-                Fade.gameObject.SetActive(false);
-                finishCallback?.Invoke();
-            });
+                fade.SetVisibility(false, () =>
+                {
+                    fade.gameObject.SetActive(false);
+                    finishCallback?.Invoke();
+                });
+            }
         }
 
-        public virtual void UpdateFade() => Fade.UpdateChildren();
+        public virtual void UpdateFade()
+        {
+            foreach (var fade in fades)
+            {
+                fade.UpdateChildren();
+            }
+        }
 
         public virtual void ShowAndHide(float showTime = 1f) => ShowAndHide(null, showTime);
         
