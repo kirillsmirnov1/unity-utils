@@ -23,8 +23,8 @@ using UnityEngine;
 
         private void Start() => SetText(variable);
 
-        private void SetText(T val) => _text.text = prefix + val.ToString() + postfix;
+        private void SetText(T value) => _text.text = $"{prefix}{value.ToString()}{postfix}";
 
-        private void OnChange(T balance) => SetText(balance);
+        private void OnChange(T value) => SetText(value);
     }
 }
