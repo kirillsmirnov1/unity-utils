@@ -7,24 +7,24 @@ using UnityEngine;
     {
 #pragma warning disable 0649
         [SerializeField] protected XVariable<T> variable;
-        [SerializeField] private string prefix;
-        [SerializeField] private string postfix;
+        [SerializeField] protected string prefix;
+        [SerializeField] protected string postfix;
 #pragma warning restore 0649
         
-        private TextMeshProUGUI _text;
+        protected TextMeshProUGUI Text;
         
-        private void Awake()
+        protected virtual void Awake()
         {
-            _text = GetComponentInChildren<TextMeshProUGUI>();
+            Text = GetComponentInChildren<TextMeshProUGUI>();
             variable.OnChange += OnChange;
         }
 
-        private void OnDestroy() => variable.OnChange -= OnChange;
+        protected virtual void OnDestroy() => variable.OnChange -= OnChange;
 
-        private void Start() => SetText(variable);
+        protected virtual void Start() => SetText(variable);
 
-        private void SetText(T value) => _text.text = $"{prefix}{value.ToString()}{postfix}";
+        protected virtual void SetText(T value) => Text.text = $"{prefix}{value.ToString()}{postfix}";
 
-        private void OnChange(T value) => SetText(value);
+        protected virtual void OnChange(T value) => SetText(value);
     }
 }
