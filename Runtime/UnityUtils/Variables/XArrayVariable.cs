@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityUtils.Extensions;
+using Random = UnityEngine.Random;
 
 namespace UnityUtils.Variables
 {
@@ -51,5 +52,7 @@ namespace UnityUtils.Variables
                 WriteSave();
             }
         }
+
+        public T RandomEntry => value[Random.Range(0, Length)];
     }
 }
