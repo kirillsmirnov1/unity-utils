@@ -11,5 +11,15 @@ namespace UnityUtils
         /// </summary>
         public static bool InPrefabScene(this GameObject gameObject) 
             => gameObject.scene.name == null || gameObject.scene.name == gameObject.name;
+        
+        public static GameObject[] GetChildren(this GameObject parent)
+        {
+            var children = new GameObject[parent.transform.childCount];
+            for (var i = 0; i < parent.transform.childCount; i++)
+            {
+                children[i] = parent.transform.GetChild(i).gameObject;
+            }
+            return children;
+        }
     }
 }
