@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityUtils.Events
@@ -11,12 +12,36 @@ namespace UnityUtils.Events
         /// </summary>
         private readonly List<GameEventListener> _eventListeners = 
             new List<GameEventListener>();
+        
+        private readonly List<Action> _eventActions = 
+            new List<Action>();
 
         public void Raise()
         {
             for (var i = _eventListeners.Count - 1; i >= 0; i--)
             {
                 _eventListeners[i].OnEventRaised();
+            }
+
+            for (int i = _eventActions.Count - 1; i >= 0; i--)
+            {
+                _eventActions[i].Invoke();
+            }
+        }
+
+        public void RegisterAction(Action action)
+        {
+            if (!_eventActions.Contains(action))
+            {
+                _eventActions.Add(action);
+            }
+        }
+        
+        public void UnregisterAction(Action action)
+        {
+            if (_eventActions.Contains(action))
+            {
+                _eventActions.Remove(action);
             }
         }
 
