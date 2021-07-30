@@ -1,5 +1,8 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace UnityUtils
 {
@@ -7,6 +10,7 @@ namespace UnityUtils
     {
         private static bool _instanceExists;
 
+#if UNITY_EDITOR
         private void OnValidate()
         {
             if(EditorApplication.isPlaying) return;
@@ -15,6 +19,7 @@ namespace UnityUtils
                 transform.GetChild(i).gameObject.SetActive(false);
             }
         }
+#endif
 
         private void Awake()
         {
