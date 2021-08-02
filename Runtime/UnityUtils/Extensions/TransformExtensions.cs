@@ -11,5 +11,7 @@ namespace Packages.UnityUtils.Extensions
                 Object.Destroy(transform.GetChild(i).gameObject);
             }
         }
+        
+        public static bool UpsideDown(this Transform transform) => transform.up.y < 0;
     }
 }
