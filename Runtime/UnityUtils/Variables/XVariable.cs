@@ -31,8 +31,15 @@ namespace UnityUtils.Variables
 #if UNITY_EDITOR
         protected virtual void OnValidate()
         {
-            guid = AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(this)).ToString();
+            CheckGuidSerialization();
             if (Application.isPlaying) OnDataChanged();
+        }
+
+        private void CheckGuidSerialization()
+        {
+            if (!string.IsNullOrEmpty(guid)) return;
+            guid = AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(this)).ToString();
+            EditorUtility.SetDirty(this);
         }
 #endif
 
