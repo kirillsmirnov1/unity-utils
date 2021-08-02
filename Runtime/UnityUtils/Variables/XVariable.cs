@@ -10,7 +10,7 @@ using UnityEditor;
 namespace UnityUtils.Variables
 {
     // [CreateAssetMenu(fileName = "New X Variable", menuName = "Variables/X Variable", order = 0)]
-    public abstract class XVariable<T> : SaveVariable
+    public abstract class XVariable<T> : InitiatedScriptableObject
     {
         public event Action<T> OnChange;
 
@@ -62,7 +62,9 @@ namespace UnityUtils.Variables
 
         #region SaveVariable
 
-        public override void ReadSave()
+        public override void Init() => ReadSave();
+
+        protected virtual void ReadSave()
         {
             var str = SaveIO.ReadString(SaveFileName, _lockable, logSave);
 
