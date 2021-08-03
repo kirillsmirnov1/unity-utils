@@ -1,4 +1,4 @@
-# Readme / XVariable
+﻿# Readme / XVariable
 Store, display and save data.  
 Inject objects. 
 
@@ -38,8 +38,23 @@ levelUpXp.Value = new[] {0, 10, 20, 40};
 var xpForNextLevel = levelUpXp[currentLevel + 1] - currentXp;
 ```
 
+### OnChange callbacks
+
+`XVariable<T>` has `OnChange<T>` callback. 
+   
+It is called when: 
+- new `Value` is set by code; 
+- value is changed from the inspector.
+
+XArrayVariable<T> has `OnEntryChange<int, T>` callback.
+   
+It is called when: 
+- Value[i] set from code; 
+- Value is changed from the inspector. In this case OnEntryChange is called for every array element.  
+
+### TODO 
+
 - [ ] existing inheritors   
-- [ ] onchange  
 - [ ] power of xvar
 
 ## Display
