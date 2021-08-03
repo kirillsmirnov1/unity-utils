@@ -86,7 +86,15 @@ by reference
 - SpriteArrayVariable
 
 ## Display
-- [ ] !!TODO!!
+
+`XVariableDisplay<T>` sets string representation of data on TextMeshProUGUI component.  
+
+Can be used to display `Variables` changing in runtime, such as balance, health, or other always-on-screen data.
+
+Using `ContentSizeFitter` and `LayoutGroup` you can make view change it size automatically. Example — `IntVariableDisplayInteractiveWidth.prefab` 
+
+![](https://github.com/kirillsmirnov1/unity-utils/raw/master/img/IntVariableDisplay.gif)
+
 ## Save
 - [ ] !!TODO!!
 ## Inject
