@@ -3,6 +3,16 @@ Some little pieces of code I find useful enough to have them in several projects
 To install add next line to `Packages/manifest.json`   
 `"trulden.unity-utils": "https://github.com/kirillsmirnov1/unity-utils.git",`
 
+## XVariable<T>
+
+XVariable<T> inheritors are used to:
+- store data;
+- pass data between objects;
+- save data;
+- inject object references.
+
+[Full readme on XVariable<T> class](https://github.com/kirillsmirnov1/unity-utils/tree/master/Runtime/UnityUtils/Variables).
+
 ### MonoScale
 
 Component to change scale of object with one slider.
