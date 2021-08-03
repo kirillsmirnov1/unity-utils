@@ -1,4 +1,4 @@
-﻿# Readme / XVariable
+# Readme / XVariable
 Store, display and save data.  
 Inject objects. 
 
@@ -109,4 +109,21 @@ Any XVariable<T> with [Serializable] data can be turned into little save file ma
 - Every scene can have it own `InitScriptableObjects`.  
 
 ## Inject
-- [ ] !!TODO!!
+
+XVariables can be used for object injection. You just need to reference XVariable of your choice in one script and set it in another.
+
+To bind object of any class you can use XVariableBinding<T>:
+- Inherit XVariable<T> and XVariableBinding<T> for your class;
+- If your classes is not derived from `Component`, `XVariableBinding.BindValue()` needs to be overriden;
+- Add derived XVariableBinding<T> to GameObject with required component;
+- Create instance of derived XVariable<T> and set it to XVariableBinding<T>.
+
+`XVariableBinding<T>` will set reference of your object to `XVariable<T>` instance on its `Awake()` call. Instance of `XVariable<T>` can be used to access to previously set object.
+
+### Existing Inheritors
+
+- `GameObjectVariableBinding`
+- `TransformVariableBinding`
+- `RectTransformVariableBinding`
+- `CameraVariableBinding`
+- `CanvasVariableBinding`
