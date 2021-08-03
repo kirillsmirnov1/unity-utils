@@ -1,4 +1,4 @@
-# Readme / XVariable
+﻿# Readme / XVariable
 Store, display and save data.  
 Inject objects. 
 
@@ -58,32 +58,32 @@ It is called when:
 
 #### XVariable<T>
 by value
-- BoolVariable
-- FloatVariable
-- DoubleVariable
-- IntVariable
-- UIntVariable
-- LongVariable
-- ULongVariable
-- StringVariable
-- Vector2Variable
-- Vector2IntVariable
-- Vector3Variable
+- `BoolVariable`
+- `FloatVariable`
+- `DoubleVariable`
+- `IntVariable`
+- `UIntVariable`
+- `LongVariable`
+- `ULongVariable`
+- `StringVariable`
+- `Vector2Variable`
+- `Vector2IntVariable`
+- `Vector3Variable`
 
 by reference
-- GameObjectVariable
-- TransformVariable
-- RectTransformVariable
-- CameraVariable
-- CanvasVariable
+- `GameObjectVariable`
+- `TransformVariable`
+- `RectTransformVariable`
+- `CameraVariable`
+- `CanvasVariable`
 
 #### XArrayVariable<T>
-- BoolArrayVariable
-- IntArrayVariable
-- StringArrayVariable
-- Vector2IntArrayVariable
-- AudioClipArrayVariable
-- SpriteArrayVariable
+- `BoolArrayVariable`
+- `IntArrayVariable`
+- `StringArrayVariable`
+- `Vector2IntArrayVariable`
+- `AudioClipArrayVariable`
+- `SpriteArrayVariable`
 
 ## Display
 
