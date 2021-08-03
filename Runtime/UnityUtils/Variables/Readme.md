@@ -54,9 +54,36 @@ It is called when:
 - Value[i] set from code; 
 - Value is changed from the inspector. In this case OnEntryChange is called for every array element.  
 
-### TODO 
+### Existing inheritors  
 
-- [ ] existing inheritors   
+#### XVariable<T>
+by value
+- BoolVariable
+- FloatVariable
+- DoubleVariable
+- IntVariable
+- UIntVariable
+- LongVariable
+- ULongVariable
+- StringVariable
+- Vector2Variable
+- Vector2IntVariable
+- Vector3Variable
+
+by reference
+- GameObjectVariable
+- TransformVariable
+- RectTransformVariable
+- CameraVariable
+- CanvasVariable
+
+#### XArrayVariable<T>
+- BoolArrayVariable
+- IntArrayVariable
+- StringArrayVariable
+- Vector2IntArrayVariable
+- AudioClipArrayVariable
+- SpriteArrayVariable
 
 ## Display
 - [ ] !!TODO!!
