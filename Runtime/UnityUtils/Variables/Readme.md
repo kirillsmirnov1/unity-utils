@@ -3,13 +3,13 @@ Store, display and save data.
 Inject objects. 
 
 Based on Ryan Hipple\'s talk [Game Architecture with Scriptable Objects](https://www.youtube.com/watch?v=raQ3iHhE_Kk).  
-Main idea of that talk is using ScriptableObjects for passing data between classes.
+The main idea of that talk is to use ScriptableObjects for passing data between classes.
 
 ## Store
 
-XVariable is easy to use to access data from different classes. Instead of setting up an access manager or DI system, you can easily drag-and-drop data into any MonoBehavior/ScriptableObject you want. Data can be set from code or inspector and used/changed anywhere.
+XVariable is easy to use to access data from different classes. Instead of setting up an access manager or DI system, you can easily drag and drop data into any MonoBehavior/ScriptableObject you want. Data can be set from code or inspector and used/changed anywhere.
 
-`XVariable<T>` is an abstract `ScriptableObject`. To store data you need to inherit it with type/class/struct of your choice and create instance of it.
+`XVariable<T>` is an abstract `ScriptableObject`. To store data you need to inherit it with type/class/struct of your choice and create an instance of it.
 
 For example, `IntVariable` looks like this:
 ```
@@ -19,7 +19,7 @@ public class IntVariable : XVariable<int> { }
 
 ### Usage
 
-`XVariable<T>` inheritors can be referenced as any other `ScriptableObject`. `XVariable<T>` data can be accessed through `Value` property or with automatic type-cast if it is possible.
+`XVariable<T>` inheritors can be referenced like any other `ScriptableObject`. `XVariable<T>` data can be accessed through `Value` property or with automatic type-cast if it is possible.
 ```
 [SerializeField] private IntVariable currentHealth;
 ...
@@ -30,7 +30,7 @@ var healthAfterHealing = currentHealth + 10; // Access in another
 
 ### Arrays usage
 
-There is also `XArrayVariable<T>` for arrays of data. It can be accessed as any other array.
+There is also `XArrayVariable<T>` for arrays of data. It can be accessed like any other array.
 
 ```
 [SerializeField] private IntArrayVariable levelUpXp;
@@ -52,7 +52,7 @@ XArrayVariable<T> has `OnEntryChange<int, T>` callback.
    
 It is called when: 
 - Value[i] set from code; 
-- Value is changed from the inspector. In this case OnEntryChange is called for every array element.  
+- Value is changed from the inspector. In this case, OnEntryChange is called for every array element.  
 
 ### Existing inheritors  
 
@@ -91,13 +91,13 @@ by reference
 
 Can be used to display `Variables` changing in runtime, such as balance, health, or other always-on-screen data.
 
-Using `ContentSizeFitter` and `LayoutGroup` you can make view change it size automatically. Example — `IntVariableDisplayInteractiveWidth.prefab` 
+Using `ContentSizeFitter` and `LayoutGroup` you can make the view change its size automatically. Example — `IntVariableDisplayInteractiveWidth.prefab` 
 
 ![](https://github.com/kirillsmirnov1/unity-utils/raw/master/img/IntVariableDisplay.gif)
 
 ## Save
 
-Any XVariable<T> with [Serializable] data can be turned into little save file manager.   
+Any XVariable<T> with `[Serializable]` data can be turned into little save file manager.   
 ![](https://github.com/kirillsmirnov1/unity-utils/raw/master/img/XVariablesSave.PNG)
 
 - Check `Save` field of XVariable you want to save;
@@ -106,7 +106,7 @@ Any XVariable<T> with [Serializable] data can be turned into little save file ma
 - Select GameObject which will be active before any of saved XVariables would be used;
 — Add `InitScriptableObjects` component to it;
 - In `InitScriptableObjects` set all XVariables you want to save;
-- Every scene can have it own `InitScriptableObjects`.  
+- Every scene can have its own `InitScriptableObjects`.  
 
 ## Inject
 
@@ -114,11 +114,11 @@ XVariables can be used for object injection. You just need to reference XVariabl
 
 To bind object of any class you can use XVariableBinding<T>:
 - Inherit XVariable<T> and XVariableBinding<T> for your class;
-- If your classes is not derived from `Component`, `XVariableBinding.BindValue()` needs to be overriden;
+- If your class is not derived from `Component`, `XVariableBinding.BindValue()` needs to be overridden;
 - Add derived XVariableBinding<T> to GameObject with required component;
-- Create instance of derived XVariable<T> and set it to XVariableBinding<T>.
+- Create an instance of derived XVariable<T> and set it to XVariableBinding<T>.
 
-`XVariableBinding<T>` will set reference of your object to `XVariable<T>` instance on its `Awake()` call. Instance of `XVariable<T>` can be used to access to previously set object.
+`XVariableBinding<T>` will set the reference of your object to `XVariable<T>` instance on its `Awake()` call. An instance of `XVariable<T>` can be used to access a previously set object.
 
 ### Existing Inheritors
 
