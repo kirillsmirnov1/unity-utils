@@ -2,7 +2,7 @@
 Store, display and save data.  
 Inject objects. 
 
-Based on Ryan Hipple\'s talk ![Game Architecture with Scriptable Objects](https://www.youtube.com/watch?v=raQ3iHhE_Kk).  
+Based on Ryan Hipple\'s talk [Game Architecture with Scriptable Objects](https://www.youtube.com/watch?v=raQ3iHhE_Kk).  
 Main idea of that talk is using ScriptableObjects for passing data between classes.
 
 ## Store
