@@ -7,6 +7,8 @@ Main idea of that talk is using ScriptableObjects for passing data between class
 
 ## Store
 
+XVariable is easy to use to access data from different classes. Instead of setting up an access manager or DI system, you can easily drag-and-drop data into any MonoBehavior/ScriptableObject you want. Data can be set from code or inspector and used/changed anywhere.
+
 `XVariable<T>` is an abstract `ScriptableObject`. To store data you need to inherit it with type/class/struct of your choice and create instance of it.
 
 For example, `IntVariable` looks like this:
@@ -55,7 +57,6 @@ It is called when:
 ### TODO 
 
 - [ ] existing inheritors   
-- [ ] power of xvar
 
 ## Display
 - [ ] !!TODO!!
