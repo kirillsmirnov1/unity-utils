@@ -96,6 +96,17 @@ Using `ContentSizeFitter` and `LayoutGroup` you can make view change it size aut
 ![](https://github.com/kirillsmirnov1/unity-utils/raw/master/img/IntVariableDisplay.gif)
 
 ## Save
-- [ ] !!TODO!!
+
+Any XVariable<T> with [Serializable] data can be turned into little save file manager.   
+![](https://github.com/kirillsmirnov1/unity-utils/raw/master/img/XVariablesSave.PNG)
+
+- Check `Save` field of XVariable you want to save;
+- Set `DefaultValue`;
+- Check `LogSave` if you want to log every read/write of that XVariable;
+- Select GameObject which will be active before any of saved XVariables would be used;
+— Add `InitScriptableObjects` component to it;
+- In `InitScriptableObjects` set all XVariables you want to save;
+- Every scene can have it own `InitScriptableObjects`.  
+
 ## Inject
 - [ ] !!TODO!!
