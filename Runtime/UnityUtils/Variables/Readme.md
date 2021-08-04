@@ -5,6 +5,8 @@ Inject objects.
 Based on Ryan Hipple\'s talk [Game Architecture with Scriptable Objects](https://www.youtube.com/watch?v=raQ3iHhE_Kk).  
 The main idea of that talk is to use ScriptableObjects for passing data between classes.
 
+Part of [Unity Utils](https://github.com/kirillsmirnov1/unity-utils) package.
+
 ## Store
 
 XVariable is easy to use to access data from different classes. Instead of setting up an access manager or DI system, you can easily drag and drop data into any MonoBehavior/ScriptableObject you want. Data can be set from code or inspector and used/changed anywhere.
