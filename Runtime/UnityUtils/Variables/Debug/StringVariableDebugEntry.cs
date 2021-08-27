@@ -30,8 +30,11 @@ namespace UnityUtils.Variables.Debug
 
         private void SetValue(string str)
         {
+            if(str == text.text) return;
             text.text = str;
             // TODO change size 
         }
+
+        public void OnEdit(string str) => Value = str;
     }
 }
