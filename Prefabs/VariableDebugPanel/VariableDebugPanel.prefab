@@ -30,31 +30,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: VariableDebugPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 5070978217512735263, guid: b89a8d5ccc1afd540bb75aa48e30e3cc,
-        type: 3}
-      propertyPath: m_Spacing
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5070978217512735263, guid: b89a8d5ccc1afd540bb75aa48e30e3cc,
-        type: 3}
-      propertyPath: m_Padding.m_Top
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5070978217512735263, guid: b89a8d5ccc1afd540bb75aa48e30e3cc,
-        type: 3}
-      propertyPath: m_Padding.m_Left
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5070978217512735263, guid: b89a8d5ccc1afd540bb75aa48e30e3cc,
-        type: 3}
-      propertyPath: m_Padding.m_Right
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5070978217512735263, guid: b89a8d5ccc1afd540bb75aa48e30e3cc,
-        type: 3}
-      propertyPath: m_Padding.m_Bottom
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 5405079181461726124, guid: b89a8d5ccc1afd540bb75aa48e30e3cc,
         type: 3}
       propertyPath: m_Pivot.x
