@@ -13,7 +13,7 @@ namespace UnityUtils.Variables.Debug
         private string Value
         {
             get => Variable.Value;
-            set => Variable.Value = value; // TODO OnChange
+            set => Variable.Value = value; 
         }
 
         public override void Fill(AVariable variable)
@@ -32,7 +32,6 @@ namespace UnityUtils.Variables.Debug
         {
             if(str == text.text) return;
             text.text = str;
-            // TODO change size 
         }
 
         public void OnEdit(string str) => Value = str;
