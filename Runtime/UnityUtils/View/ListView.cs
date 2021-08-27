@@ -16,14 +16,14 @@ namespace UnityUtils.View
             entries = new List<ListViewEntry<T>>(GetComponentsInChildren<ListViewEntry<T>>(true));
         }
         
-        protected void SetEntries(List<T> data)
+        protected virtual void SetEntries(List<T> data)
         {
             CheckConsistency(data);
             FillData(data);
             this.DelayAction(0f, () => LayoutRebuilder.ForceRebuildLayoutImmediate(scrollContent));
         }
 
-        private void CheckConsistency(List<T> data)
+        protected virtual void CheckConsistency(List<T> data)
         {
             var viewsToTakenDiff = entries.Count - data.Count;
 
@@ -37,7 +37,7 @@ namespace UnityUtils.View
             }
         }
 
-        private void SpawnViews(int viewsToSpawn)
+        protected virtual void SpawnViews(int viewsToSpawn)
         {
             for (int i = 0; i < viewsToSpawn; i++)
             {
@@ -45,7 +45,7 @@ namespace UnityUtils.View
             }
         }
 
-        private void DisableViews(int viewsToDisable)
+        protected virtual void DisableViews(int viewsToDisable)
         {
             for (int i = 0; i < viewsToDisable; i++)
             {
@@ -53,7 +53,7 @@ namespace UnityUtils.View
             }
         }
 
-        private void FillData(List<T> takenQuests)
+        protected virtual void FillData(List<T> takenQuests)
         {
             for (int i = 0; i < takenQuests.Count; i++)
             {
