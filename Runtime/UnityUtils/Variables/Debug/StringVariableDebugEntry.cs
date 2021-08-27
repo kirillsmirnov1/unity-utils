@@ -7,19 +7,31 @@ namespace UnityUtils.Variables.Debug
     {
         [SerializeField] private TextMeshProUGUI text;
 
+        private new StringVariable Variable 
+            => (StringVariable) base.Variable;
+
         private string Value
         {
-            get => ((StringVariable) Variable).Value;
-            set => ((StringVariable) Variable).Value = value; // TODO OnChange
+            get => Variable.Value;
+            set => Variable.Value = value; // TODO OnChange
         }
-        
+
         public override void Fill(AVariable variable)
         {
             base.Fill(variable);
-            text.text = Value; 
-            // TODO subscribe OnChange
+            SetValue(Value);
+            Variable.OnChange += SetValue;
         }
-        
-        
+
+        private void OnDestroy()
+        {
+            Variable.OnChange -= SetValue;
+        }
+
+        private void SetValue(string str)
+        {
+            text.text = str;
+            // TODO change size 
+        }
     }
 }
