@@ -5,7 +5,7 @@ namespace UnityUtils.Variables.Debug
 {
     public class StringVariableDebugEntry : VariableDebugEntry
     {
-        [SerializeField] private TextMeshProUGUI text;
+        [SerializeField] private TMP_InputField text;
 
         private new StringVariable Variable 
             => (StringVariable) base.Variable;
