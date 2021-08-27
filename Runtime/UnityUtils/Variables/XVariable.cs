@@ -10,7 +10,7 @@ using UnityEditor;
 namespace UnityUtils.Variables
 {
     // [CreateAssetMenu(fileName = "New X Variable", menuName = "Variables/X Variable", order = 0)]
-    public abstract class XVariable<T> : InitiatedScriptableObject
+    public abstract class XVariable<T> : AVariable
     {
         public event Action<T> OnChange;
 

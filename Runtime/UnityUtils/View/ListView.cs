@@ -7,9 +7,9 @@ namespace UnityUtils.View
 {
     public abstract class ListView<T> : MonoBehaviour
     {
-        [SerializeField] private List<ListViewEntry<T>> entries;
-        [SerializeField] private RectTransform scrollContent;
-        [SerializeField] private GameObject listViewEntryPrefab;
+        [SerializeField] protected List<ListViewEntry<T>> entries;
+        [SerializeField] protected RectTransform scrollContent;
+        [SerializeField] protected GameObject listViewEntryPrefab;
         
         protected virtual void OnValidate()
         {
@@ -53,11 +53,11 @@ namespace UnityUtils.View
             }
         }
 
-        protected virtual void FillData(List<T> takenQuests)
+        protected virtual void FillData(List<T> data)
         {
-            for (int i = 0; i < takenQuests.Count; i++)
+            for (int i = 0; i < data.Count; i++)
             {
-                entries[i].Fill(takenQuests[i]);
+                entries[i].Fill(data[i]);
             }
         }
     }
