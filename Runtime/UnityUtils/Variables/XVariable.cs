@@ -64,6 +64,8 @@ namespace UnityUtils.Variables
             if (save) WriteSave();
         }
 
+        public void SetDefaultValue() => Value = defaultValue;
+
         public static implicit operator T(XVariable<T> v) => v.Value;
         public override string ToString() => Value.ToString();
 
@@ -77,7 +79,7 @@ namespace UnityUtils.Variables
 
             if (str.IsNull())
             {
-                value = defaultValue;
+                SetDefaultValue();
                 WriteSave();
                 return;
             }
