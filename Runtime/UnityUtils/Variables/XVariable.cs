@@ -84,9 +84,9 @@ namespace UnityUtils.Variables
                 return;
             }
 
-            var data = typeof(T).IsPrimitive
-                ? (T) Convert.ChangeType(str, typeof(T))
-                : JsonUtility.FromJson<T>(str);
+            var data = SerializedAsJson
+                ? JsonUtility.FromJson<T>(str)
+                : (T) Convert.ChangeType(str, typeof(T));
 
             Value = data;
         }
@@ -94,11 +94,13 @@ namespace UnityUtils.Variables
         protected void WriteSave()
             => SaveIO.WriteString(
                 SaveFileName,
-                typeof(T).IsPrimitive
-                    ? Value.ToString()
-                    : JsonUtility.ToJson(Value),
+                SerializedAsJson
+                    ? JsonUtility.ToJson(Value)
+                    : Value.ToString(),
                 _lockable,
                 logSave);
+
+        protected virtual bool SerializedAsJson => !typeof(T).IsPrimitive;
 
         #endregion
     }
