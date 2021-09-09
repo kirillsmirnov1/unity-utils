@@ -17,7 +17,7 @@ namespace UnityUtils
             var type = obj.GetType();
             foreach (var field in type.GetRuntimeFields())
             {
-                if (!field.IsStatic && (field.IsPublic || Attribute.IsDefined(field, typeof(SerializeField))))
+                if (!field.IsStatic && Serialized(field))
                 {
                     var val = field.GetValue(obj);
                     if (val.IsNull())
@@ -28,6 +28,15 @@ namespace UnityUtils
                 }
             }
             return noNullFields;
+
+            static bool Serialized(FieldInfo field)
+            {
+                return SerializedAsPublic() 
+                       || Attribute.IsDefined(field, typeof(SerializeField));
+
+                bool SerializedAsPublic() 
+                    => field.IsPublic && !Attribute.IsDefined(field, typeof(NonSerializedAttribute));
+            }
         }
 
         public static bool CheckNullFields(this MonoBehaviour obj) => CheckNullFieldsImpl(obj);
