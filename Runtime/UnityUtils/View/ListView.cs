@@ -29,7 +29,7 @@ namespace UnityUtils.View
 
             if (viewsToTakenDiff < 0)
             {
-                SpawnViews(viewsToTakenDiff);
+                SpawnViews(-viewsToTakenDiff);
             }
             else if (viewsToTakenDiff > 0)
             {
