@@ -37,7 +37,6 @@ namespace UnityUtils.Variables
 
         private void CheckGuidSerialization()
         {
-            if (!string.IsNullOrEmpty(guid)) return;
             guid = AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(this)).ToString();
             EditorUtility.SetDirty(this);
         }
