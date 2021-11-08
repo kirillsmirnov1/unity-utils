@@ -17,8 +17,8 @@ namespace UnityUtils.Variables
         
         public override string Uid => guid;
         public override Type Type => typeof(T);
-        public override object RawValue => Value;
         public override bool IsPrimitive => typeof(T).IsPrimitive;
+        public override object RawValue => Value;
 
         [SerializeField, HideInInspector] private string guid;
 
