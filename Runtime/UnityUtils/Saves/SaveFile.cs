@@ -35,7 +35,7 @@ namespace UnityUtils.Saves
         {
             for (int i = 0; i < vars.Length; i++)
             {
-                _guidToVar.Add(vars[i].SaveFileName, i);
+                _guidToVar.Add(vars[i].Uid, i);
             }
         }
 
@@ -77,7 +77,7 @@ namespace UnityUtils.Saves
             for (int i = 0; i < vars.Length; i++)
             {
                 var variable = vars[i];
-                serializedVars.pairs[i].name = variable.SaveFileName;
+                serializedVars.pairs[i].name = variable.Uid;
                 serializedVars.pairs[i].data = variable.IsPrimitive
                     ? variable.ToString()
                     : JsonUtility.ToJson(variable.RawValue);

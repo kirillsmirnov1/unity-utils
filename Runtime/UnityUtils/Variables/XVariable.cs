@@ -1,8 +1,5 @@
 ﻿using System;
-using UnityUtils.Attributes;
 using UnityEngine;
-using UnityUtils.Saves;
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -16,17 +13,12 @@ namespace UnityUtils.Variables
 
 #pragma warning disable 0649
         [SerializeField] protected T value;
-        
-        [Separator("Save")]
-        [SerializeField] protected bool save;
-        [SerializeField] [ConditionalField("save")] protected bool logSave;
-        [SerializeField] [ConditionalField("save")] protected T defaultValue;
 #pragma warning restore 0649
-
-        private readonly object _lockable = new object();
-        public override string SaveFileName => guid;
+        
+        public override string Uid => guid;
         public override Type Type => typeof(T);
         public override object RawValue => Value;
+        public override bool IsPrimitive => typeof(T).IsPrimitive;
 
         [SerializeField, HideInInspector] private string guid;
 
@@ -65,47 +57,9 @@ namespace UnityUtils.Variables
         {
             InvokeOnChangeBase();
             OnChange?.Invoke(value);
-            if (save) WriteSave();
         }
-
-        public override void SetDefaultValue() => Value = defaultValue;
 
         public static implicit operator T(XVariable<T> v) => v.Value;
         public override string ToString() => Value.ToString();
-
-        #region SaveVariable
-
-        public override void Init() => ReadSave();
-
-        protected virtual void ReadSave()
-        {
-            var str = SaveIO.ReadString(SaveFileName, _lockable, logSave);
-
-            if (str.IsNull())
-            {
-                SetDefaultValue();
-                WriteSave();
-                return;
-            }
-
-            var data = IsPrimitive
-                ? (T) Convert.ChangeType(str, typeof(T))
-                : JsonUtility.FromJson<T>(str);
-
-            Value = data;
-        }
-
-        protected void WriteSave()
-            => SaveIO.WriteString(
-                SaveFileName,
-                IsPrimitive
-                    ? Value.ToString()
-                    : JsonUtility.ToJson(Value),
-                _lockable,
-                logSave);
-
-        public override bool IsPrimitive => typeof(T).IsPrimitive;
-
-        #endregion
     }
 }

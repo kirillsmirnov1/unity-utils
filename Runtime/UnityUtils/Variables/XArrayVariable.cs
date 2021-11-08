@@ -23,8 +23,6 @@ namespace UnityUtils.Variables
                 {
                     OnEntryChange?.Invoke(i, Value[i]);
                 }
-
-                if(save) WriteSave();
             }
         }
 #endif
@@ -49,7 +47,7 @@ namespace UnityUtils.Variables
                 if(Value[i].Equals(value)) return;
                 Value[i] = value;
                 OnEntryChange?.Invoke(i, value);
-                WriteSave();
+                OnDataChanged();
             }
         }
 
