@@ -9,6 +9,7 @@ namespace UnityUtils.Variables
         public abstract string SaveFileName { get; }
         public abstract bool IsPrimitive { get; }
         public abstract Type Type { get; }
+        public abstract object RawValue { get; }
 
         public abstract void SetDefaultValue();
         public abstract void Set(object value);

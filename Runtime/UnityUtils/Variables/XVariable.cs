@@ -26,6 +26,7 @@ namespace UnityUtils.Variables
         private readonly object _lockable = new object();
         public override string SaveFileName => guid;
         public override Type Type => typeof(T);
+        public override object RawValue => Value;
 
         [SerializeField, HideInInspector] private string guid;
 

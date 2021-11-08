@@ -42,7 +42,7 @@ namespace UnityUtils.Saves
         private void ReadSave()
         {
             var serializationPairs = SaveIO
-                .ReadObjectAsJsonString<SaveFileSerialized>(SaveFileName, _lockable, logSave)
+                .ReadObjectAsJsonString<SerializedVars>(SaveFileName, _lockable, logSave)
                 .pairs;
 
             foreach (var serializationPair in serializationPairs)
@@ -66,13 +66,26 @@ namespace UnityUtils.Saves
 
         private void WriteSave()
         {
-            // TODO combine variables
-            // TODO write JSON
+            var serializedVars = new SerializedVars(vars.Length);
+            for (int i = 0; i < vars.Length; i++)
+            {
+                var variable = vars[i];
+                serializedVars.pairs[i].name = variable.SaveFileName;
+                serializedVars.pairs[i].data = variable.IsPrimitive
+                    ? variable.ToString()
+                    : JsonUtility.ToJson(variable.RawValue);
+            }
+            var serializedSave = JsonUtility.ToJson(serializedVars);
+            SaveIO.WriteString(SaveFileName, serializedSave, _lockable, logSave);
         }
         
         [Serializable]
-        public struct SaveFileSerialized
+        public struct SerializedVars
         {
+            public SerializedVars(int size)
+            {
+                pairs = new SerializationPair[size];
+            }
             public SerializationPair[] pairs;
         }
         
