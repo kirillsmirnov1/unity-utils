@@ -14,7 +14,7 @@ namespace UnityUtils.Saves
         private readonly object _lockable = new object();
         private string SaveFileName => name;
 
-        private readonly Dictionary<string, int> _uidToVar = new Dictionary<string, int>();
+        private readonly Dictionary<string, VariableReference> _uidToVar = new Dictionary<string, VariableReference>();
 
         public override void Init()
         {
@@ -35,7 +35,8 @@ namespace UnityUtils.Saves
         {
             for (int i = 0; i < vars.Length; i++)
             {
-                _uidToVar.Add(vars[i].Uid, i);
+                var variable = vars[i];
+                _uidToVar.Add(variable.Uid, new VariableReference {Variable = variable, Type = variable.Type});
             }
         }
 
@@ -44,7 +45,7 @@ namespace UnityUtils.Saves
             var str = SaveIO.ReadString(SaveFileName, _lockable, logSave);
             if (str.IsNull())
             {
-                if(logSave) Debug.Log("No save found, writing current data");
+                Debug.Log("No save found, writing current data");
                 WriteSave();
                 return;
             }
@@ -59,15 +60,22 @@ namespace UnityUtils.Saves
 
         private void PushSaveToVariable(IdDataPair dataPair)
         {
-            var variableIndex = _uidToVar[dataPair.uid];
-            var variableRaw = vars[variableIndex];
+            if (dataPair.uid == null || !_uidToVar.ContainsKey(dataPair.uid))
+            {
+                Debug.Log($"Couldn't find variable for {dataPair.ToString()}");
+                return;
+            }
+            
+            var variableRef = _uidToVar[dataPair.uid];
+            var variableType = variableRef.Type;
+            var aVariable = variableRef.Variable;
 
             var serializedData = dataPair.data;
-            var data = variableRaw.IsPrimitive
-                ? Convert.ChangeType(serializedData, variableRaw.Type) // IMPR no need to get it every time
-                : JsonUtility.FromJson(serializedData, variableRaw.Type);
+            var data = aVariable.IsPrimitive
+                ? Convert.ChangeType(serializedData, variableType)
+                : JsonUtility.FromJson(serializedData, variableType);
             
-            variableRaw.Set(data);
+            aVariable.Set(data);
         }
 
         private void WriteSave()
@@ -106,6 +114,14 @@ namespace UnityUtils.Saves
             
             public string uid;
             public string data;
+
+            public override string ToString() => $"uid: {uid}, data: {data}";
+        }
+
+        private struct VariableReference
+        {
+            public AVariable Variable;
+            public Type Type;
         }
     }
 }
