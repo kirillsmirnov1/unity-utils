@@ -70,29 +70,37 @@ namespace UnityUtils.Saves
             }
 
             var data = JsonUtility.FromJson<SaveFileData>(str);
-
-            foreach (var dataPair in data.pairs)
+            var dataDict = new Dictionary<string, string>();
+            foreach (var pair in data.pairs)
             {
-                PushSaveToVariable(dataPair);
+                dataDict.Add(pair.uid, pair.data);
+            }
+
+            for (int i = 0; i < varRefs.Length; i++)
+            {
+                var aVariable = varRefs[i].variable;
+                var uid = aVariable.Uid;
+                if (dataDict.ContainsKey(uid))
+                {
+                    PushSaveToVariable(aVariable, dataDict[uid]);
+                }
+                else
+                {
+                    if(varRefs[i].defaultValue == null) continue;
+                    aVariable.Set(varRefs[i].defaultValue.RawValue);
+                }
             }
         }
 
-        private void PushSaveToVariable(IdDataPair dataPair)
+        private void PushSaveToVariable(AVariable variable, string dataString)
         {
-            if (dataPair.uid == null || !_uidToVar.ContainsKey(dataPair.uid))
-            {
-                Debug.Log($"Couldn't find variable for {dataPair.ToString()}");
-                return;
-            }
-            
-            var variableRef = _uidToVar[dataPair.uid];
+            var variableRef = _uidToVar[variable.Uid];
             var variableType = variableRef.Type;
             var aVariable = variableRef.Variable;
-
-            var serializedData = dataPair.data;
+            
             var data = aVariable.IsPrimitive
-                ? Convert.ChangeType(serializedData, variableType)
-                : JsonUtility.FromJson(serializedData, variableType);
+                ? Convert.ChangeType(dataString, variableType)
+                : JsonUtility.FromJson(dataString, variableType);
             
             aVariable.Set(data);
         }
