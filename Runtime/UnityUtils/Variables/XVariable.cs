@@ -62,6 +62,7 @@ namespace UnityUtils.Variables
 
         protected void OnDataChanged()
         {
+            InvokeOnChangeBase();
             OnChange?.Invoke(value);
             if (save) WriteSave();
         }

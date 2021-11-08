@@ -20,7 +20,15 @@ namespace UnityUtils.Saves
         {
             InitDictionary();
             ReadSave();
-            // TODO subscribe to changes 
+            SubscribeToChanges();
+        }
+
+        private void SubscribeToChanges() // IMPR other subscription modes 
+        {
+            foreach (var variable in vars)
+            {
+                variable.OnChangeBase += WriteSave;
+            }
         }
 
         private void InitDictionary()
