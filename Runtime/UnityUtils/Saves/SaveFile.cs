@@ -41,8 +41,15 @@ namespace UnityUtils.Saves
 
         private void ReadSave()
         {
-            var serializationPairs = SaveIO
-                .ReadObjectAsJsonString<SerializedVars>(SaveFileName, _lockable, logSave)
+            var str = SaveIO.ReadString(SaveFileName, _lockable, logSave);
+            if (str.IsNull())
+            {
+                if(logSave) Debug.Log("No save found, writing current data");
+                WriteSave();
+                return;
+            }
+            
+            var serializationPairs = JsonUtility.FromJson<SerializedVars>(str)
                 .pairs;
 
             foreach (var serializationPair in serializationPairs)
