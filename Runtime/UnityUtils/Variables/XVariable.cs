@@ -24,7 +24,8 @@ namespace UnityUtils.Variables
 #pragma warning restore 0649
 
         private readonly object _lockable = new object();
-        private string SaveFileName => guid;
+        public override string SaveFileName => guid;
+        public override Type Type => typeof(T);
 
         [SerializeField, HideInInspector] private string guid;
 
@@ -52,6 +53,8 @@ namespace UnityUtils.Variables
                 OnDataChanged();
             }
         }
+
+        public override void Set(object newValue) => Value = (T) newValue;
 
         private bool SameValue(T newValue) 
             => newValue == null && this.value == null 
@@ -83,9 +86,9 @@ namespace UnityUtils.Variables
                 return;
             }
 
-            var data = SerializedAsJson
-                ? JsonUtility.FromJson<T>(str)
-                : (T) Convert.ChangeType(str, typeof(T));
+            var data = IsPrimitive
+                ? (T) Convert.ChangeType(str, typeof(T))
+                : JsonUtility.FromJson<T>(str);
 
             Value = data;
         }
@@ -93,13 +96,13 @@ namespace UnityUtils.Variables
         protected void WriteSave()
             => SaveIO.WriteString(
                 SaveFileName,
-                SerializedAsJson
-                    ? JsonUtility.ToJson(Value)
-                    : Value.ToString(),
+                IsPrimitive
+                    ? Value.ToString()
+                    : JsonUtility.ToJson(Value),
                 _lockable,
                 logSave);
 
-        protected virtual bool SerializedAsJson => !typeof(T).IsPrimitive;
+        public override bool IsPrimitive => typeof(T).IsPrimitive;
 
         #endregion
     }
