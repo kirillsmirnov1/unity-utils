@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityUtils.Variables;
 
@@ -69,13 +70,17 @@ namespace UnityUtils.Saves
                 return;
             }
 
-            var data = JsonUtility.FromJson<SaveFileData>(str);
-            var dataDict = new Dictionary<string, string>();
-            foreach (var pair in data.pairs)
-            {
-                dataDict.Add(pair.uid, pair.data);
-            }
+            var dataDict = SortByUid(str);
+            PushSaveToVariables(dataDict);
+        }
 
+        private static Dictionary<string, string> SortByUid(string saveFileData) 
+            => JsonUtility.FromJson<SaveFileData>(saveFileData)
+                .pairs
+                .ToDictionary(pair => pair.uid, pair => pair.data);
+
+        private void PushSaveToVariables(Dictionary<string, string> dataDict)
+        {
             for (int i = 0; i < varRefs.Length; i++)
             {
                 var aVariable = varRefs[i].variable;
@@ -86,7 +91,7 @@ namespace UnityUtils.Saves
                 }
                 else
                 {
-                    if(varRefs[i].defaultValue == null) continue;
+                    if (varRefs[i].defaultValue == null) continue;
                     aVariable.Set(varRefs[i].defaultValue.RawValue);
                 }
             }
