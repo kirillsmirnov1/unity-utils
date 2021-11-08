@@ -14,7 +14,7 @@ namespace UnityUtils.Saves
         private readonly object _lockable = new object();
         private string SaveFileName => name;
 
-        private readonly Dictionary<string, int> _guidToVar = new Dictionary<string, int>();
+        private readonly Dictionary<string, int> _uidToVar = new Dictionary<string, int>();
 
         public override void Init()
         {
@@ -35,7 +35,7 @@ namespace UnityUtils.Saves
         {
             for (int i = 0; i < vars.Length; i++)
             {
-                _guidToVar.Add(vars[i].Uid, i);
+                _uidToVar.Add(vars[i].Uid, i);
             }
         }
 
@@ -48,22 +48,21 @@ namespace UnityUtils.Saves
                 WriteSave();
                 return;
             }
-            
-            var serializationPairs = JsonUtility.FromJson<SerializedVars>(str)
-                .pairs;
 
-            foreach (var serializationPair in serializationPairs)
+            var data = JsonUtility.FromJson<SaveFileData>(str);
+
+            foreach (var dataPair in data.pairs)
             {
-                ReadSaveToVariable(serializationPair);
+                PushSaveToVariable(dataPair);
             }
         }
 
-        private void ReadSaveToVariable(SerializationPair serializationPair)
+        private void PushSaveToVariable(IdDataPair dataPair)
         {
-            var variableIndex = _guidToVar[serializationPair.name];
+            var variableIndex = _uidToVar[dataPair.uid];
             var variableRaw = vars[variableIndex];
 
-            var serializedData = serializationPair.data;
+            var serializedData = dataPair.data;
             var data = variableRaw.IsPrimitive
                 ? Convert.ChangeType(serializedData, variableRaw.Type) // IMPR no need to get it every time
                 : JsonUtility.FromJson(serializedData, variableRaw.Type);
@@ -73,33 +72,39 @@ namespace UnityUtils.Saves
 
         private void WriteSave()
         {
-            var serializedVars = new SerializedVars(vars.Length);
+            var save = new SaveFileData(vars.Length);
             for (int i = 0; i < vars.Length; i++)
             {
                 var variable = vars[i];
-                serializedVars.pairs[i].name = variable.Uid;
-                serializedVars.pairs[i].data = variable.IsPrimitive
-                    ? variable.ToString()
-                    : JsonUtility.ToJson(variable.RawValue);
+                save.pairs[i] = new IdDataPair(variable.Uid, Serialized(variable));
             }
-            var serializedSave = JsonUtility.ToJson(serializedVars);
+            var serializedSave = JsonUtility.ToJson(save);
             SaveIO.WriteString(SaveFileName, serializedSave, _lockable, logSave);
         }
-        
-        [Serializable]
-        public struct SerializedVars
+
+        private static string Serialized(AVariable variable)
         {
-            public SerializedVars(int size)
-            {
-                pairs = new SerializationPair[size];
-            }
-            public SerializationPair[] pairs;
+            return variable.IsPrimitive
+                ? variable.ToString()
+                : JsonUtility.ToJson(variable.RawValue);
+        }
+
+        [Serializable]
+        public struct SaveFileData
+        {
+            public IdDataPair[] pairs;
+            
+            public SaveFileData(int size) 
+                => pairs = new IdDataPair[size];
         }
         
         [Serializable]
-        public struct SerializationPair
+        public struct IdDataPair
         {
-            public string name;
+            public IdDataPair(string id, string data) 
+                => (uid, this.data) = (id, data);
+            
+            public string uid;
             public string data;
         }
     }
