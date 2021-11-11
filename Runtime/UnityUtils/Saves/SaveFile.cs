@@ -65,13 +65,25 @@ namespace UnityUtils.Saves
             var str = SaveIO.ReadString(SaveFileName, _lockable, logSave);
             if (str.IsNull())
             {
-                Debug.Log("No save found, writing current data");
+                Debug.Log("No save found, writing defaults");
+                PushDefaultsToVariables();
                 WriteSave();
                 return;
             }
 
             var dataDict = SortByUid(str);
             PushSaveToVariables(dataDict);
+        }
+
+        private void PushDefaultsToVariables()
+        {
+            foreach (var varRef in varRefs)
+            {
+                if (varRef.defaultValue != null)
+                {
+                    varRef.variable.Set(varRef.defaultValue.RawValue);
+                }
+            }
         }
 
         private static Dictionary<string, string> SortByUid(string saveFileData) 
