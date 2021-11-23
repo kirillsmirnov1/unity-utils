@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityUtils.Saves
+namespace UnityUtils.SO
 {
     public class InitScriptableObjects : MonoBehaviour
     {
