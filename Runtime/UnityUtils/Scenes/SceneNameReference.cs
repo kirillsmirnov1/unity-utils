@@ -9,6 +9,9 @@ namespace UnityUtils.Scenes
         public string sceneName;
 #if UNITY_EDITOR
         public SceneAsset sceneAsset;
+        /// <summary>
+        /// Should be called in OnValidate() 
+        /// </summary>
         public void SerializeName()
         {
             try
