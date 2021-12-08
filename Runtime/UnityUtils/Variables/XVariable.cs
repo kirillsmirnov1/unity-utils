@@ -53,7 +53,7 @@ namespace UnityUtils.Variables
             => newValue == null && this.value == null 
                || newValue != null && newValue.Equals(this.value);
 
-        protected void OnDataChanged()
+        protected virtual void OnDataChanged()
         {
             InvokeOnChangeBase();
             OnChange?.Invoke(value);
