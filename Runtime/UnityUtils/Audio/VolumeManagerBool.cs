@@ -4,16 +4,15 @@ using UnityUtils.Variables;
 
 namespace UnityUtils.Audio
 {
-    public class VolumeManager : MonoBehaviour
+    public class VolumeManagerBool : MonoBehaviour
     {
-#pragma warning disable 0649
         [SerializeField] private BoolVariable volumeOn;
         [SerializeField] private AudioMixer audioGroup;
-#pragma warning restore 0649
+        [SerializeField] private string volumeParamName = "Volume";
 
-        private void Start() => SetVolume(volumeOn);
+        private void OnEnable() => SetVolume(volumeOn);
         private void Awake() => volumeOn.OnChange += SetVolume;
         private void OnDestroy() => volumeOn.OnChange -= SetVolume;
-        private void SetVolume(bool volume) => audioGroup.SetFloat("Volume", volume ? 0 : -80);
+        private void SetVolume(bool volume) => audioGroup.SetFloat(volumeParamName, volume ? 0 : -80);
     }
 }
