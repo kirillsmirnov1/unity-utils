@@ -11,6 +11,7 @@ namespace UnityUtils.Variables.Debug
         
         [Header("Prefabs")] 
         [SerializeField] private GameObject stringVarDebugEntry;
+        [SerializeField] private GameObject floatVarDebugEntry;
         // TODO prefabs
         
         protected override void OnValidate() { }
@@ -45,6 +46,7 @@ namespace UnityUtils.Variables.Debug
             variable switch
             {
                 StringVariable _ => stringVarDebugEntry,
+                FloatVariable _ => floatVarDebugEntry,
                 _ => null
             };
     }
