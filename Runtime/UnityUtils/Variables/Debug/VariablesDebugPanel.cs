@@ -16,7 +16,7 @@ namespace UnityUtils.Variables.Debug
         
         protected override void OnValidate() { }
 
-        private void OnEnable() => SetEntries(variables);
+        private void Start() => SetEntries(variables);
 
         protected override void CheckConsistency(List<AVariable> data)
         {
