@@ -5,14 +5,14 @@ namespace UnityUtils.Variables.Debug
 {
     public class FloatVariableDebugEntry : VariableDebugEntry
     {
-        [SerializeField] private float iterationStep = 0.1f;
-        [SerializeField] private int digitsAfterDot = 2;
-        [SerializeField] private TMP_InputField text;
+        [SerializeField] protected float iterationStep = 0.1f;
+        [SerializeField] protected int digitsAfterDot = 2;
+        [SerializeField] protected TMP_InputField text;
 
-        private new FloatVariable Variable
+        protected new FloatVariable Variable
             => (FloatVariable) base.Variable;
 
-        private float Value
+        protected float Value
         {
             get => Variable.Value;
             set => Variable.Value = value;
@@ -25,22 +25,22 @@ namespace UnityUtils.Variables.Debug
             Variable.OnChange += SetValue;
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             Variable.OnChange -= SetValue;
         }
 
-        private void SetValue(float val)
+        protected virtual void SetValue(float val)
         {
             text.text = string.Format($"{{0:F{digitsAfterDot}}}", val);
         }
 
-        public void OnEdit(string str)
+        public virtual void OnEdit(string str)
         {
             Value = float.Parse(str);
         }
 
-        public void OnPlus() => Value += iterationStep;
-        public void OnMinus() => Value -= iterationStep;
+        public virtual void OnPlus() => Value += iterationStep;
+        public virtual void OnMinus() => Value -= iterationStep;
     }
 }
