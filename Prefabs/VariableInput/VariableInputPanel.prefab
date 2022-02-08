@@ -30,7 +30,7 @@ PrefabInstance:
     - target: {fileID: 1656583519883237397, guid: b89a8d5ccc1afd540bb75aa48e30e3cc,
         type: 3}
       propertyPath: m_Name
-      value: VariableDebugPanel
+      value: VariableInputPanel
       objectReference: {fileID: 0}
     - target: {fileID: 5405079181461726124, guid: b89a8d5ccc1afd540bb75aa48e30e3cc,
         type: 3}

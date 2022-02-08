@@ -1,9 +1,9 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace UnityUtils.Variables.Debug
+namespace UnityUtils.Variables.Input
 {
-    public class StringVariableDebugEntry : VariableDebugEntry
+    public class StringVariableInput : VariableInput
     {
         [SerializeField] private TMP_InputField text;
 

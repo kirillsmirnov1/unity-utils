@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityUtils.View;
 
-namespace UnityUtils.Variables.Debug
+namespace UnityUtils.Variables.Input
 {
-    public class VariablesDebugPanel : ListView<AVariable>
+    public class VariableInputPanel : ListView<AVariable>
     {
         [Header("Debug Panel")]
         [SerializeField] private List<AVariable> variables;
@@ -13,7 +13,7 @@ namespace UnityUtils.Variables.Debug
         [SerializeField] private GameObject stringVarDebugEntry;
         [SerializeField] private GameObject floatVarDebugEntry;
         // TODO prefabs
-        
+
         protected override void OnValidate() { }
 
         private void Start() => SetEntries(variables);
@@ -35,7 +35,7 @@ namespace UnityUtils.Variables.Debug
                 }
                 else
                 {
-                    var entry = Instantiate(prefab, scrollContent).GetComponent<VariableDebugEntry>();
+                    var entry = Instantiate(prefab, scrollContent).GetComponent<VariableInput>();
                     entries.Add(entry);
                     entry.Fill(variable);
                 }

@@ -1,9 +1,9 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace UnityUtils.Variables.Debug
+namespace UnityUtils.Variables.Input
 {
-    public class FloatVariableDebugEntry : VariableDebugEntry
+    public class FloatVariableInput : VariableInput
     {
         [SerializeField] protected float iterationStep = 0.1f;
         [SerializeField] protected int digitsAfterDot = 2;

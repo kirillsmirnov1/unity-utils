@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityUtils.View;
 
-namespace UnityUtils.Variables.Debug
+namespace UnityUtils.Variables.Input
 {
-    public abstract class VariableDebugEntry : ListViewEntry<AVariable>
+    public abstract class VariableInput : ListViewEntry<AVariable>
     {
         [SerializeField] protected TMP_Text variableName;
         
