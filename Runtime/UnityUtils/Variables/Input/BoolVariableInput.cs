@@ -16,9 +16,9 @@ namespace UnityUtils.Variables.Input
             set => Variable.Value = value;
         }
 
-        public override void Fill(AVariable variable)
+        public override void Fill(AVariable variable, VariableInputProfile profile)
         {
-            base.Fill(variable);
+            base.Fill(variable, profile);
             SetValue(Value);
             Variable.OnChange += SetValue;
         }

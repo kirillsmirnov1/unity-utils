@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityUtils.View;
 
@@ -6,19 +7,21 @@ namespace UnityUtils.Variables.Input
 {
     public class VariableInputPanel : ListView<AVariable>
     {
+        [Header("Settings")]
+        [SerializeField] private VariableInputProfile profile;
+        
         [Header("Debug Panel")]
-        [SerializeField] private List<AVariable> variables;
+        [SerializeField] private List<VariableWithProfile> variables;
         
         [Header("Prefabs")] 
         [SerializeField] private GameObject stringVarInput;
         [SerializeField] private GameObject floatVarInput;
         [SerializeField] private GameObject boolVarInput;
-
         // TODO prefabs
 
         protected override void OnValidate() { }
 
-        private void Start() => SetEntries(variables);
+        private void Start() => SetEntries(variables.Select(x => x.variable).ToList());
 
         protected override void CheckConsistency(List<AVariable> data)
         {
@@ -39,7 +42,8 @@ namespace UnityUtils.Variables.Input
                 {
                     var entry = Instantiate(prefab, scrollContent).GetComponent<VariableInput>();
                     entries.Add(entry);
-                    entry.Fill(variable);
+                    var profileOverride = variables[i].profileOverride; 
+                    entry.Fill(variable, profileOverride == null ? profile : profileOverride);
                 }
             }
         }

@@ -5,9 +5,10 @@ namespace UnityUtils.Variables.Input
 {
     public class FloatVariableInput : VariableInput
     {
-        [SerializeField] protected float iterationStep = 0.1f;
-        [SerializeField] protected int digitsAfterDot = 2;
         [SerializeField] protected InputField text;
+        
+        protected int DigitsAfterDot = 2;
+        protected float IterationStep = 0.1f;
 
         protected new FloatVariable Variable
             => (FloatVariable) base.Variable;
@@ -18,9 +19,11 @@ namespace UnityUtils.Variables.Input
             set => Variable.Value = value;
         }
 
-        public override void Fill(AVariable variable)
+        public override void Fill(AVariable variable, VariableInputProfile profile)
         {
-            base.Fill(variable);
+            base.Fill(variable, profile);
+            DigitsAfterDot = profile.digitsAfterDot;
+            IterationStep = profile.floatIterationStep;
             SetValue(Value);
             Variable.OnChange += SetValue;
         }
@@ -32,7 +35,7 @@ namespace UnityUtils.Variables.Input
 
         protected virtual void SetValue(float val)
         {
-            text.text = string.Format($"{{0:F{digitsAfterDot}}}", val);
+            text.text = string.Format($"{{0:F{DigitsAfterDot}}}", val);
         }
 
         public virtual void OnEdit(string str)
@@ -40,7 +43,7 @@ namespace UnityUtils.Variables.Input
             Value = float.Parse(str);
         }
 
-        public virtual void OnPlus() => Value += iterationStep;
-        public virtual void OnMinus() => Value -= iterationStep;
+        public virtual void OnPlus() => Value += IterationStep;
+        public virtual void OnMinus() => Value -= IterationStep;
     }
 }
