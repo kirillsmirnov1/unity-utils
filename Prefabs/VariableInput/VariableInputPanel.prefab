@@ -16,9 +16,11 @@ MonoBehaviour:
   scrollContent: {fileID: 4966838959590302116}
   listViewEntryPrefab: {fileID: 0}
   variables: []
-  stringVarDebugEntry: {fileID: 7497842428252016997, guid: 0bd6c51e2399eef41b4a904dea287a94,
+  stringVarInput: {fileID: 7497842428252016997, guid: 0bd6c51e2399eef41b4a904dea287a94,
     type: 3}
-  floatVarDebugEntry: {fileID: 1174162078942703328, guid: 74b3d5ec8560b104c8765941717ec436,
+  floatVarInput: {fileID: 1174162078942703328, guid: 74b3d5ec8560b104c8765941717ec436,
+    type: 3}
+  boolVarInput: {fileID: 1114102282033590537, guid: c84e530d37efd4042a56e25cd47933a3,
     type: 3}
 --- !u!1001 &3628139573681284119
 PrefabInstance:

@@ -10,8 +10,10 @@ namespace UnityUtils.Variables.Input
         [SerializeField] private List<AVariable> variables;
         
         [Header("Prefabs")] 
-        [SerializeField] private GameObject stringVarDebugEntry;
-        [SerializeField] private GameObject floatVarDebugEntry;
+        [SerializeField] private GameObject stringVarInput;
+        [SerializeField] private GameObject floatVarInput;
+        [SerializeField] private GameObject boolVarInput;
+
         // TODO prefabs
 
         protected override void OnValidate() { }
@@ -45,8 +47,9 @@ namespace UnityUtils.Variables.Input
         private GameObject PickPrefab(AVariable variable) =>
             variable switch
             {
-                StringVariable _ => stringVarDebugEntry,
-                FloatVariable _ => floatVarDebugEntry,
+                StringVariable _ => stringVarInput,
+                FloatVariable _ => floatVarInput,
+                BoolVariable _ => boolVarInput,
                 _ => null
             };
     }
