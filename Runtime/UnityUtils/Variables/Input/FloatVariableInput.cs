@@ -1,5 +1,5 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityUtils.Variables.Input
 {
@@ -7,7 +7,7 @@ namespace UnityUtils.Variables.Input
     {
         [SerializeField] protected float iterationStep = 0.1f;
         [SerializeField] protected int digitsAfterDot = 2;
-        [SerializeField] protected TMP_InputField text;
+        [SerializeField] protected InputField text;
 
         protected new FloatVariable Variable
             => (FloatVariable) base.Variable;

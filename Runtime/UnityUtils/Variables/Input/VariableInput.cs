@@ -1,12 +1,12 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityUtils.View;
 
 namespace UnityUtils.Variables.Input
 {
     public abstract class VariableInput : ListViewEntry<AVariable>
     {
-        [SerializeField] protected TMP_Text variableName;
+        [SerializeField] protected Text variableName;
         
         protected AVariable Variable;
         public override void Fill(AVariable variable)

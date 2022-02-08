@@ -1,11 +1,11 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityUtils.Variables.Input
 {
     public class StringVariableInput : VariableInput
     {
-        [SerializeField] private TMP_InputField text;
+        [SerializeField] private InputField text;
 
         private new StringVariable Variable 
             => (StringVariable) base.Variable;
