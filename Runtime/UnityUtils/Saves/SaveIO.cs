@@ -20,10 +20,15 @@ namespace UnityUtils.Saves
         {
             lock (lockable)
             {
-                var file = File.Create(Application.persistentDataPath + "/" + saveFileName);
                 if(logSave) Debug.Log($"Writing file: {saveFileName} string: {str}");
-                new BinaryFormatter().Serialize(file, str);
-                file.Close();
+                
+                #if UNITY_WEBGL
+                    PlayerPrefs.SetString(saveFileName, str);
+                #else
+                    var file = File.Create(Application.persistentDataPath + "/" + saveFileName);
+                    new BinaryFormatter().Serialize(file, str);
+                    file.Close();
+                #endif
             }
         }
 
@@ -42,13 +47,25 @@ namespace UnityUtils.Saves
             {
                 lock (lockable)
                 {
-                    if (!File.Exists(Application.persistentDataPath + "/" + saveFileName)) return null;
+                    #if UNITY_WEBGL
+                        if (!PlayerPrefs.HasKey(saveFileName))
+                        {
+                            if(logSave) Debug.Log("No save file found");
+                            return null;
+                        }
+                        var str = PlayerPrefs.GetString(saveFileName);
+                    #else
+                        if (!File.Exists(Application.persistentDataPath + "/" + saveFileName))
+                        {
+                            if(logSave) Debug.Log("No save file found");
+                            return null;
+                        }
+                        var file = File.Open(Application.persistentDataPath + "/" + saveFileName, FileMode.Open);
+                        var str = (string) new BinaryFormatter().Deserialize(file);
+                        file.Close();
+                    #endif
 
-                    var file = File.Open(Application.persistentDataPath + "/" + saveFileName, FileMode.Open);
-                    var str = (string) new BinaryFormatter().Deserialize(file);
                     if (logSave) Debug.Log($"Read file: {saveFileName} string: {str}");
-                    file.Close();
-
                     return str;
                 }
             }
