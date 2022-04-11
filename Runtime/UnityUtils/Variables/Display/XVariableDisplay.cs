@@ -1,4 +1,4 @@
-﻿﻿using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
  namespace UnityUtils.Variables.Display
@@ -8,6 +8,7 @@ using UnityEngine;
 #pragma warning disable 0649
         [SerializeField] protected XVariable<T> variable;
         [SerializeField] protected string prefix;
+        [SerializeField] protected string format = "{0}";
         [SerializeField] protected string postfix;
 #pragma warning restore 0649
         
@@ -23,7 +24,7 @@ using UnityEngine;
 
         protected virtual void Start() => SetText(variable);
 
-        protected virtual void SetText(T value) => Text.text = $"{prefix}{value.ToString()}{postfix}";
+        protected virtual void SetText(T value) => Text.text = $"{prefix}{string.Format(format, value)}{postfix}";
 
         protected virtual void OnChange(T value) => SetText(value);
     }
