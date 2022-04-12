@@ -49,12 +49,17 @@ namespace UnityUtils.Saves
         public void ResetToDefaults()
         {
             UnsubscribeFromChanges();
+            SetDefaultValues();   
+            SubscribeToChanges();
+        }
+
+        public void SetDefaultValues()
+        {
             foreach (var varRef in varRefs)
             {
-                if(varRef.defaultValue == null) continue;
+                if (varRef.defaultValue == null) continue;
                 varRef.variable.Set(varRef.defaultValue.RawValue);
-            }   
-            SubscribeToChanges();
+            }
         }
 
         private void InitDictionary()
