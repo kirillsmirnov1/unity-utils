@@ -25,6 +25,11 @@ namespace UnityUtils.Saves
             SubscribeToChanges();
         }
 
+        public override void Stop()
+        {
+            UnsubscribeFromChanges();
+        }
+
         private void SubscribeToChanges() // IMPR other subscription modes 
         {
             foreach (var varRef in varRefs)
