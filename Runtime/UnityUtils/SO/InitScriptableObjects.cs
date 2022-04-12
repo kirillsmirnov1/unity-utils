@@ -15,5 +15,13 @@ namespace UnityUtils.SO
                 obj.Init();
             }
         }
+
+        private void OnDestroy()
+        {
+            foreach (var obj in objectsToInit)
+            {
+                obj.Stop();
+            }
+        }
     }
 }
