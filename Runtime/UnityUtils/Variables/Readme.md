@@ -99,15 +99,14 @@ Using `ContentSizeFitter` and `LayoutGroup` you can make the view change its siz
 
 ## Save
 
-Any XVariable<T> with `[Serializable]` data can be turned into little save file manager.   
-![](https://github.com/kirillsmirnov1/unity-utils/raw/master/img/XVariablesSave.PNG)
+Any XVariable<T> with `[Serializable]` data can be saved via `SaveFile.cs`
 
-- Check `Save` field of XVariable you want to save;
-- Set `DefaultValue`;
-- Check `LogSave` if you want to log every read/write of that XVariable;
+- Create `SaveFile` Scriptable Object.  
+- Add variables you want to save in created SaveFile.
+- Provide variables with default values for them.   
 - Select GameObject which will be active before any of saved XVariables would be used;
-— Add `InitScriptableObjects` component to it;
-- In `InitScriptableObjects` set all XVariables you want to save;
+- Add `InitScriptableObjects` component to it;
+- In `InitScriptableObjects` set add your `SaveFile` SO;
 - Every scene can have its own `InitScriptableObjects`.  
 
 ## Inject
