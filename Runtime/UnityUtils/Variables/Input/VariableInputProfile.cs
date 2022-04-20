@@ -14,6 +14,9 @@ namespace UnityUtils.Variables.Input
 
         [ConditionalField("mode", compareValues: new object[] {Mode.All, Mode.Float})] 
         [SerializeField] public float floatIterationStep = 0.5f;
+        
+        [ConditionalField("mode", compareValues: new object[] {Mode.All, Mode.Int})] 
+        public int intIterationStep = 1;
 
         [Serializable]
         public enum Mode
@@ -22,6 +25,7 @@ namespace UnityUtils.Variables.Input
             String,
             Bool,
             Float,
+            Int,
         }
     }
 }

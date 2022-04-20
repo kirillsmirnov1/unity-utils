@@ -17,6 +17,8 @@ namespace UnityUtils.Variables.Input
         [SerializeField] private GameObject stringVarInput;
         [SerializeField] private GameObject floatVarInput;
         [SerializeField] private GameObject boolVarInput;
+        [SerializeField] private GameObject intVarInput;
+
         // TODO prefabs
 
         protected override void OnValidate() { }
@@ -54,6 +56,7 @@ namespace UnityUtils.Variables.Input
                 StringVariable _ => stringVarInput,
                 FloatVariable _ => floatVarInput,
                 BoolVariable _ => boolVarInput,
+                IntVariable _ => intVarInput,
                 _ => null
             };
     }

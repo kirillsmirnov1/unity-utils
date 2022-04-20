@@ -1,28 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &2552472738639055677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2640481945941146626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19a18299f8e74488bcd8018aa0f24260, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entries: []
-  scrollContent: {fileID: 4966838959590302116}
-  listViewEntryPrefab: {fileID: 0}
-  variables: []
-  profile: {fileID: 11400000, guid: d87389b97f25ab04c94b51ba020d20ec, type: 2}
-  stringVarInput: {fileID: 7497842428252016997, guid: 0bd6c51e2399eef41b4a904dea287a94,
-    type: 3}
-  floatVarInput: {fileID: 1174162078942703328, guid: 74b3d5ec8560b104c8765941717ec436,
-    type: 3}
-  boolVarInput: {fileID: 1114102282033590537, guid: c84e530d37efd4042a56e25cd47933a3,
-    type: 3}
 --- !u!1001 &3628139573681284119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -159,3 +136,28 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3628139573681284119}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2552472738639055677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2640481945941146626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a18299f8e74488bcd8018aa0f24260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entries: []
+  scrollContent: {fileID: 4966838959590302116}
+  listViewEntryPrefab: {fileID: 0}
+  profile: {fileID: 11400000, guid: d87389b97f25ab04c94b51ba020d20ec, type: 2}
+  variables: []
+  stringVarInput: {fileID: 7497842428252016997, guid: 0bd6c51e2399eef41b4a904dea287a94,
+    type: 3}
+  floatVarInput: {fileID: 1174162078942703328, guid: 74b3d5ec8560b104c8765941717ec436,
+    type: 3}
+  boolVarInput: {fileID: 1114102282033590537, guid: c84e530d37efd4042a56e25cd47933a3,
+    type: 3}
+  intVarInput: {fileID: 1174162078942703328, guid: 5237175bac7e8dc48969a6288950c397,
+    type: 3}
