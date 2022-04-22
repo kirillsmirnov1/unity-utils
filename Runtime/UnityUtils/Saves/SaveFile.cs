@@ -16,11 +16,8 @@ namespace UnityUtils.Saves
         private readonly object _lockable = new object();
         private string SaveFileName => name;
 
-        private readonly Dictionary<string, VariableReference> _uidToVar = new Dictionary<string, VariableReference>();
-
         public override void Init()
         {
-            InitDictionary();
             ReadSave();
             SubscribeToChanges();
         }
@@ -58,43 +55,34 @@ namespace UnityUtils.Saves
             foreach (var varRef in varRefs)
             {
                 if (varRef.defaultValue == null) continue;
-                varRef.variable.Set(varRef.defaultValue.RawValue);
+                CloneValue(varRef.variable, varRef.defaultValue);
             }
         }
 
-        private void InitDictionary()
-        {
-            for (int i = 0; i < varRefs.Length; i++)
-            {
-                var variable = varRefs[i].variable;
-                _uidToVar.Add(variable.Uid, new VariableReference {Variable = variable, Type = variable.Type});
-            }
-        }
+        private void CloneValue(AVariable to, AVariable from) 
+            => to.Set(GetValueClone(from));
 
+        // Serializing is the easiest way to create clean clone of data
+        // As all vars references in SaveFile should be Serializable anyway
+        private object GetValueClone(AVariable variableToClone) =>
+            DeSerialized(
+                variableToClone.IsPrimitive, 
+                variableToClone.Type, 
+                Serialized(variableToClone));
+        
         private void ReadSave()
         {
             var str = SaveIO.ReadString(SaveFileName, _lockable, logSave);
             if (str.IsNull())
             {
                 Debug.Log("No save found, writing defaults");
-                PushDefaultsToVariables();
+                SetDefaultValues();
                 WriteSave();
                 return;
             }
 
             var dataDict = SortByUid(str);
             PushSaveToVariables(dataDict);
-        }
-
-        private void PushDefaultsToVariables()
-        {
-            foreach (var varRef in varRefs)
-            {
-                if (varRef.defaultValue != null)
-                {
-                    varRef.variable.Set(varRef.defaultValue.RawValue);
-                }
-            }
         }
 
         private static Dictionary<string, string> SortByUid(string saveFileData) 
@@ -110,27 +98,28 @@ namespace UnityUtils.Saves
                 var uid = aVariable.Uid;
                 if (dataDict.ContainsKey(uid))
                 {
-                    PushSaveToVariable(aVariable, dataDict[uid]);
+                    PushSerializedDataToVariable(aVariable, dataDict[uid]);
                 }
                 else
                 {
                     if (varRefs[i].defaultValue == null) continue;
-                    aVariable.Set(varRefs[i].defaultValue.RawValue);
+                    CloneValue(aVariable, varRefs[i].defaultValue);
                 }
             }
         }
 
-        private void PushSaveToVariable(AVariable variable, string dataString)
+        private void PushSerializedDataToVariable(AVariable variable, string dataString) 
+            => variable.Set(
+                DeSerialized(
+                    variable.IsPrimitive, 
+                    variable.Type, 
+                    dataString));
+
+        private object DeSerialized(bool isPrimitive, Type variableType, string dataString)
         {
-            var variableRef = _uidToVar[variable.Uid];
-            var variableType = variableRef.Type;
-            var aVariable = variableRef.Variable;
-            
-            var data = aVariable.IsPrimitive
+            return isPrimitive 
                 ? Convert.ChangeType(dataString, variableType)
                 : JsonUtility.FromJson(dataString, variableType);
-            
-            aVariable.Set(data);
         }
 
         private void WriteSave()
