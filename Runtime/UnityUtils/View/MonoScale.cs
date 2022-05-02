@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityUtils
+namespace UnityUtils.View
 {
     public class MonoScale : MonoBehaviour
     {
