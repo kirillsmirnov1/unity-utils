@@ -25,6 +25,7 @@ namespace UnityUtils.Saves
         public override void Stop()
         {
             UnsubscribeFromChanges();
+            SetDefaultValues();
         }
 
         private void SubscribeToChanges() // IMPR other subscription modes 
