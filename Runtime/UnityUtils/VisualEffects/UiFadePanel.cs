@@ -6,44 +6,26 @@ namespace UnityUtils.VisualEffects
 {
     public class UiFadePanel : MonoBehaviour
     {
-        [SerializeField] protected LazyFade[] fades;
+        [SerializeField] private float fadeSeconds = .25f;
+        [SerializeField] private int fadeSteps = 20;
+        [SerializeField] protected CanvasGroup[] groups;
+
         protected virtual void OnValidate()
         {
-            fades = GetComponentsInChildren<LazyFade>(true);
+            groups = GetComponentsInChildren<CanvasGroup>(true);
         }
 
-        public virtual void Show() => Show(null);
+        public virtual void Show() 
+            => Show(null);
         
-        public virtual void Show(Action finishCallback)
-        {
-            foreach (var fade in fades)
-            {
-                fade.gameObject.SetActive(true);
-                fade.SetVisibility(true, finishCallback);
-            }
-        }
+        public virtual void Show(Action finishCallback) 
+            => StartCoroutine(VisibilityCoroutine(true, finishCallback));
 
-        public virtual void Hide() => Hide(null);
+        public virtual void Hide() 
+            => Hide(null);
 
-        public virtual void Hide(Action finishCallback)
-        {
-            foreach (var fade in fades)
-            {
-                fade.SetVisibility(false, () =>
-                {
-                    fade.gameObject.SetActive(false);
-                    finishCallback?.Invoke();
-                });
-            }
-        }
-
-        public virtual void UpdateFade()
-        {
-            foreach (var fade in fades)
-            {
-                fade.UpdateChildren();
-            }
-        }
+        public virtual void Hide(Action finishCallback) 
+            => StartCoroutine(VisibilityCoroutine(false, finishCallback));
 
         public virtual void ShowAndHide(float showTime = 1f) => ShowAndHide(null, showTime);
         
@@ -52,9 +34,33 @@ namespace UnityUtils.VisualEffects
 
         protected virtual IEnumerator ShowAndHideCoroutine(Action finishCallback, float showtime)
         {
-            Show();
+            yield return VisibilityCoroutine(true, null);
             yield return new WaitForSeconds(showtime);
-            Hide(finishCallback);
+            yield return VisibilityCoroutine(false, null);
+            finishCallback?.Invoke();
+        }
+        
+        private IEnumerator VisibilityCoroutine(bool visibility, Action finishCallback)
+        {
+            var from = visibility ? 0f : 1f;
+            var to = visibility ? 1f : 0f;
+
+            var deltaTime = fadeSeconds / fadeSteps;
+            var deltaStep = 1f / fadeSteps;
+
+            var wfs = new WaitForSeconds(deltaTime);
+
+            for (int iStep = 0; iStep <= fadeSteps; ++iStep)
+            {
+                for (var iGroup = 0; iGroup < groups.Length; iGroup++)
+                {
+                    groups[iGroup].alpha = Mathf.Lerp(@from, to, deltaStep * iStep);
+                }
+
+                yield return wfs;
+            }
+
+            finishCallback?.Invoke();
         }
     }
 }
