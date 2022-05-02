@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 
-namespace UnityUtils
+namespace UnityUtils.Scenes
 {
     public class SceneLoaderOnClick : SceneLoader
     {
