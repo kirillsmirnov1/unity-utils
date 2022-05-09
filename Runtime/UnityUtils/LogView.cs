@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -20,12 +21,15 @@ namespace UnityUtils
             Color.black, 
             Color.red, 
         };
+        [SerializeField] private string[] stringsToOmit;
         
         private void Awake() => Application.logMessageReceived += Log;
         private void OnDestroy() => Application.logMessageReceived -= Log;
 
         private void Log(string condition, string stacktrace, LogType type)
         {
+            if(stringsToOmit.Any(condition.Contains)) return;
+            
             var logMessage = new StringBuilder();
             logMessage.Append("<color=#");
             logMessage.Append(ColorUtility.ToHtmlStringRGB(logColors[(int) type]));
