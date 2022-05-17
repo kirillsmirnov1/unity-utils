@@ -12,6 +12,7 @@ namespace UnityUtils.Variables.Input
         [SerializeField] private RectTransform entryRoot;
 
         private List<IntArrayVariableInputEntry> _entries;
+        private RectTransform _rect;
 
         public override Type VariableType => typeof(ArrayWrap<int>);
 
@@ -21,6 +22,7 @@ namespace UnityUtils.Variables.Input
         public override void Fill(AVariable variable, VariableInputProfile profile)
         {
             base.Fill(variable, profile);
+            _rect = GetComponent<RectTransform>();
             variableName.text = variable.name;
             ReGenerateElements();
             Variable.OnChange += OnVariableChange;
@@ -62,11 +64,16 @@ namespace UnityUtils.Variables.Input
             ClearElements();
             for (int i = 0; i < Variable.Length; i++)
             {
-                var entry = Instantiate(entryPrefab, entryRoot);
-                entry.Fill(this, i, Variable[i]);
-                _entries.Add(entry);
+                InstantiateEntry(i, Variable[i]);
             }
-            this.DelayAction(0f, () => LayoutRebuilder.ForceRebuildLayoutImmediate(entryRoot));
+            ReBuildLayout();
+        }
+
+        private void InstantiateEntry(int i, int value)
+        {
+            var entry = Instantiate(entryPrefab, entryRoot);
+            entry.Fill(this, i, value);
+            _entries.Add(entry);
         }
 
         private void ClearElements()
@@ -80,7 +87,8 @@ namespace UnityUtils.Variables.Input
 
         public void AddElement()
         {
-            // TODO 
+            Variable.Add(0);
+            ReBuildLayout();
         }
 
         public void RemoveElement(int index)
@@ -90,5 +98,8 @@ namespace UnityUtils.Variables.Input
 
         public void OnEntryEdit(int index, int value) 
             => Variable[index] = value;
+
+        private void ReBuildLayout() 
+            => this.DelayAction(0f, () => LayoutRebuilder.ForceRebuildLayoutImmediate(_rect));
     }
 }

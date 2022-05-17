@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityUtils.Extensions;
 using Random = UnityEngine.Random;
@@ -27,7 +28,7 @@ namespace UnityUtils.Variables
         }
 #endif
 
-        public new T[] Value { 
+        public new List<T> Value { 
             get => value.data;
             set
             {
@@ -37,7 +38,13 @@ namespace UnityUtils.Variables
             }
         }
 
-        public int Length => Value?.Length ?? 0;
+        public void Add(T val)
+        {
+            value.data.Add(val);
+            OnDataChanged();
+        }
+
+        public int Length => Value?.Count ?? 0;
         
         public T this[int i]
         {
