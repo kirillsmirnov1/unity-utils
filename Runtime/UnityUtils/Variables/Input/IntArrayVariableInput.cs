@@ -1,14 +1,13 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityUtils.Extensions;
 
 namespace UnityUtils.Variables.Input
 {
     public class IntArrayVariableInput : VariableInput // TODO arrayVariableInput
     {
-        [SerializeField] private Text arrayName;
         [SerializeField] private GameObject entryPrefab;
+        [SerializeField] private RectTransform entryRoot;
         
         public override Type VariableType => typeof(ArrayWrap<int>);
 
@@ -18,7 +17,7 @@ namespace UnityUtils.Variables.Input
         public override void Fill(AVariable variable, VariableInputProfile profile)
         {
             base.Fill(variable, profile);
-            arrayName.text = variable.name;
+            variableName.text = variable.name;
             GenerateElements();
             Variable.OnChange += OnVariableChange;
             Variable.OnEntryChange += OnEntryChange;
@@ -43,12 +42,19 @@ namespace UnityUtils.Variables.Input
         private void GenerateElements()
         {
             ClearElements();
-            // TODO 
+            for (int i = 0; i < Variable.Length; i++)
+            {
+                // TODO use real entry prefab 
+                Instantiate(entryPrefab, entryRoot);
+            }
         }
 
         private void ClearElements()
         {
-            // TODO 
+            for (int i = entryRoot.childCount - 1; i >= 0; i--)
+            {
+                Destroy(entryRoot.GetChild(i).gameObject);
+            }
         }
 
         public void AddElement()
