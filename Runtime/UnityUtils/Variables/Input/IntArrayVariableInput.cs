@@ -69,12 +69,12 @@ namespace UnityUtils.Variables.Input
         private void InstantiateEntry(int i, int value)
         {
             var entry = Instantiate(entryPrefab, entryRoot);
-            FillEntry(i, value);
             _entries.Add(entry);
+            FillEntry(i, value);
         }
 
         private void FillEntry(int i, int value) 
-            => _entries[i].Fill(this, i, value);
+            => _entries[i].Fill(this, Profile, i, value);
 
         private void ClearElements()
         {
