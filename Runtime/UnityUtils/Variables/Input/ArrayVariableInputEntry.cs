@@ -30,5 +30,11 @@ namespace UnityUtils.Variables.Input
         }
 
         protected abstract void UpdateValueDisplay(T newValue);
+        
+        protected void ChangeValue(T newValue) 
+            => Parent.OnEntryEdit(Index, newValue);
+        
+        public void OnXPressed() 
+            => Parent.RemoveElement(Index);
     }
 }

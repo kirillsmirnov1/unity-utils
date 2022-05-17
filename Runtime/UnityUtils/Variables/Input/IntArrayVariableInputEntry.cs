@@ -18,11 +18,5 @@ namespace UnityUtils.Variables.Input
 
         public void OnMinusPressed() 
             => ChangeValue(Value - Profile.intIterationStep);
-
-        public void OnXPressed() 
-            => Parent.RemoveElement(Index);
-
-        private void ChangeValue(int newValue) 
-            => Parent.OnEntryEdit(Index, newValue);
     }
 }
