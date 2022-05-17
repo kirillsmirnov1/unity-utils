@@ -22,7 +22,7 @@ namespace UnityUtils.Variables.Input
         {
             base.Fill(variable, profile);
             variableName.text = variable.name;
-            GenerateElements();
+            ReGenerateElements();
             Variable.OnChange += OnVariableChange;
             Variable.OnEntryChange += OnEntryChange;
         }
@@ -35,7 +35,7 @@ namespace UnityUtils.Variables.Input
 
         private void OnVariableChange(ArrayWrap<int> newVal)
         {
-            GenerateElements();
+            ReGenerateElements();
         }
 
         private void OnEntryChange(int index, int value)
@@ -43,7 +43,7 @@ namespace UnityUtils.Variables.Input
             // TODO 
         }
 
-        private void GenerateElements()
+        private void ReGenerateElements()
         {
             ClearElements();
             for (int i = 0; i < Variable.Length; i++)
