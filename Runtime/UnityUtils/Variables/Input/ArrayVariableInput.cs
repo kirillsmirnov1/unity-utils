@@ -88,8 +88,13 @@ namespace UnityUtils.Variables.Input
         protected void FillEntry(int i, T value) 
             => Entries[i].Fill(this, Profile, i, value);
 
-        public abstract void OnEntryEdit(int index, T newValue); // IMPR implement here?
+        public void OnEntryEdit(int index, T newValue)
+            => Variable[index] = newValue;
+        
+        public void RemoveElement(int index)
+            => Variable.RemoveAt(index);
 
-        public abstract void RemoveElement(int index); // IMPR implement here?
+        public void AddElement() 
+            => Variable.Add(default);
     }
 }
