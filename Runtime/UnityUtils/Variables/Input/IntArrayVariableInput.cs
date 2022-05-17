@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityUtils.Extensions;
@@ -9,7 +10,9 @@ namespace UnityUtils.Variables.Input
     {
         [SerializeField] private IntArrayVariableInputEntry entryPrefab;
         [SerializeField] private RectTransform entryRoot;
-        
+
+        private List<IntArrayVariableInputEntry> _entries;
+
         public override Type VariableType => typeof(ArrayWrap<int>);
 
         protected new IntArrayVariable Variable
@@ -45,8 +48,9 @@ namespace UnityUtils.Variables.Input
             ClearElements();
             for (int i = 0; i < Variable.Length; i++)
             {
-                Instantiate(entryPrefab, entryRoot)
-                    .Fill(this, i, Variable[i]);
+                var entry = Instantiate(entryPrefab, entryRoot);
+                entry.Fill(this, i, Variable[i]);
+                _entries.Add(entry);
             }
             this.DelayAction(0f, () => LayoutRebuilder.ForceRebuildLayoutImmediate(entryRoot));
         }
@@ -57,6 +61,7 @@ namespace UnityUtils.Variables.Input
             {
                 Destroy(entryRoot.GetChild(i).gameObject);
             }
+            _entries = new List<IntArrayVariableInputEntry>();
         }
 
         public void AddElement()
