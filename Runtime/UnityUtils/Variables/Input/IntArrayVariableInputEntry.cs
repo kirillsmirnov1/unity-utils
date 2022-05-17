@@ -17,11 +17,9 @@ namespace UnityUtils.Variables.Input
             input.text = val.ToString();
         }
 
-        public void OnEdit(string str)
-        {
-            // TODO 
-        }
-        
+        public void OnEdit(string str) 
+            => _parent.OnEntryEdit(_index, int.Parse(str));
+
         public void OnPlusPressed()
         {
             // TODO
