@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace UnityUtils.Variables.Input
@@ -8,21 +7,11 @@ namespace UnityUtils.Variables.Input
     {
         [SerializeField] private InputField input;
 
-        private IntArrayVariableInput _parent; // TODO move up 
-        private int Value { get; set; } = Int32.MinValue;
-        
-        public void Fill(IntArrayVariableInput parent, VariableInputProfile profile, int i, int val)
-        {
-            base.Fill(profile, i);
-            _parent = parent;
-
-            if(Value == val) return;
-            Value = val;
-            input.text = Value.ToString();
-        }
+        protected override void UpdateValueDisplay(int newValue) 
+            => input.text = newValue.ToString();
 
         public void OnEdit(string str) 
-            => _parent.OnEntryEdit(Index, int.Parse(str));
+            => Parent.OnEntryEdit(Index, int.Parse(str));
 
         public void OnPlusPressed() 
             => ChangeValue(Value + Profile.intIterationStep);
@@ -30,10 +19,10 @@ namespace UnityUtils.Variables.Input
         public void OnMinusPressed() 
             => ChangeValue(Value - Profile.intIterationStep);
 
-        private void ChangeValue(int newValue) 
-            => _parent.OnEntryEdit(Index, newValue);
-
         public void OnXPressed() 
-            => _parent.RemoveElement(Index);
+            => Parent.RemoveElement(Index);
+
+        private void ChangeValue(int newValue) 
+            => Parent.OnEntryEdit(Index, newValue);
     }
 }

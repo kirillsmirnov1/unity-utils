@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityUtils.Extensions;
 
@@ -8,12 +6,6 @@ namespace UnityUtils.Variables.Input
 {
     public class IntArrayVariableInput : ArrayVariableInput<int>
     {
-        [SerializeField] private IntArrayVariableInputEntry entryPrefab;
-
-        private List<IntArrayVariableInputEntry> _entries;
-
-        public override Type VariableType => typeof(ListWrap<int>);
-
         protected new IntArrayVariable Variable
             => (IntArrayVariable) base.Variable;
 
@@ -34,7 +26,7 @@ namespace UnityUtils.Variables.Input
 
         private void OnVariableChange(ListWrap<int> newVal)
         {
-            if (newVal.Length != _entries.Count)
+            if (newVal.Length != Entries.Count)
             {
                 ReGenerateElements();
             }
@@ -66,12 +58,9 @@ namespace UnityUtils.Variables.Input
         private void InstantiateEntry(int i, int value)
         {
             var entry = Instantiate(entryPrefab, entryRoot);
-            _entries.Add(entry);
+            Entries.Add(entry);
             FillEntry(i, value);
         }
-
-        private void FillEntry(int i, int value) 
-            => _entries[i].Fill(this, Profile, i, value);
 
         private void ClearElements()
         {
@@ -79,16 +68,16 @@ namespace UnityUtils.Variables.Input
             {
                 Destroy(entryRoot.GetChild(i).gameObject);
             }
-            _entries = new List<IntArrayVariableInputEntry>();
+            Entries = new List<ArrayVariableInputEntry<int>>();
         }
 
         public void AddElement() 
             => Variable.Add(0);
 
-        public void RemoveElement(int index) 
+        public override void RemoveElement(int index) 
             => Variable.RemoveAt(index);
 
-        public void OnEntryEdit(int index, int value) 
+        public override void OnEntryEdit(int index, int value) 
             => Variable[index] = value;
 
         private void ReBuildLayout() 
