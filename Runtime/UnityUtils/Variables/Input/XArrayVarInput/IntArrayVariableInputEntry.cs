@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace UnityUtils.Variables.Input
+namespace UnityUtils.Variables.Input.XArrayVarInput
 {
     public class IntArrayVariableInputEntry : ArrayVariableInputEntry<int>
     {

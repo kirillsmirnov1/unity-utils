@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityUtils.Extensions;
+using UnityUtils.Variables.Input.XVarInput;
 
-namespace UnityUtils.Variables.Input
+namespace UnityUtils.Variables.Input.XArrayVarInput
 {
     public abstract class ArrayVariableInput<T> : VariableInput
     {

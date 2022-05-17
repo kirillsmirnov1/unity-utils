@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UnityUtils.Variables.Input
+namespace UnityUtils.Variables.Input.XVarInput
 {
     public class IntVariableInput : VariableInput
     {

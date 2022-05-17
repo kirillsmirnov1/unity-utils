@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityUtils.Variables.Input.XVarInput;
 using UnityUtils.View;
 
 namespace UnityUtils.Variables.Input

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityUtils.View;
 
-namespace UnityUtils.Variables.Input
+namespace UnityUtils.Variables.Input.XVarInput
 {
     public abstract class VariableInput : ListViewEntry<AVariable>
     {

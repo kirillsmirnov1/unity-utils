@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityUtils.Variables.Input
+namespace UnityUtils.Variables.Input.XArrayVarInput
 {
     public abstract class ArrayVariableInputEntry<T> : MonoBehaviour
     {
