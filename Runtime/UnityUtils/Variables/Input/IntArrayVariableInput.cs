@@ -54,10 +54,8 @@ namespace UnityUtils.Variables.Input
             }
         }
 
-        private void OnEntryChange(int index, int value)
-        {
-            // TODO 
-        }
+        private void OnEntryChange(int index, int value) 
+            => _entries[index].Fill(this, index, value);
 
         private void ReGenerateElements()
         {
