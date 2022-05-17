@@ -2,7 +2,7 @@
 
 namespace UnityUtils.Variables.Input
 {
-    public abstract class ArrayVariableInputEntry : MonoBehaviour
+    public abstract class ArrayVariableInputEntry<T> : MonoBehaviour
     {
         protected int Index;
         protected VariableInputProfile Profile;

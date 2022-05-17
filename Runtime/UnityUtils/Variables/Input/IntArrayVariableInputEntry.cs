@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UnityUtils.Variables.Input
 {
-    public class IntArrayVariableInputEntry : ArrayVariableInputEntry
+    public class IntArrayVariableInputEntry : ArrayVariableInputEntry<int>
     {
         [SerializeField] private InputField input;
 

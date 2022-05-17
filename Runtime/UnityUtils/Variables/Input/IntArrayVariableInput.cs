@@ -6,13 +6,11 @@ using UnityUtils.Extensions;
 
 namespace UnityUtils.Variables.Input
 {
-    public class IntArrayVariableInput : VariableInput // TODO arrayVariableInput
+    public class IntArrayVariableInput : ArrayVariableInput<int>
     {
         [SerializeField] private IntArrayVariableInputEntry entryPrefab;
-        [SerializeField] private RectTransform entryRoot;
 
         private List<IntArrayVariableInputEntry> _entries;
-        private RectTransform _rect;
 
         public override Type VariableType => typeof(ListWrap<int>);
 
@@ -22,8 +20,7 @@ namespace UnityUtils.Variables.Input
         public override void Fill(AVariable variable, VariableInputProfile profile)
         {
             base.Fill(variable, profile);
-            _rect = GetComponent<RectTransform>();
-            variableName.text = variable.name;
+
             ReGenerateElements();
             Variable.OnChange += OnVariableChange;
             Variable.OnEntryChange += FillEntry;
@@ -95,6 +92,6 @@ namespace UnityUtils.Variables.Input
             => Variable[index] = value;
 
         private void ReBuildLayout() 
-            => this.DelayAction(0f, () => LayoutRebuilder.ForceRebuildLayoutImmediate(_rect));
+            => this.DelayAction(0f, () => LayoutRebuilder.ForceRebuildLayoutImmediate(Rect));
     }
 }
