@@ -278,7 +278,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2802830782706253522}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2499026773046811521}
+        m_TargetAssemblyTypeName: UnityUtils.Variables.Input.IntArrayVariableInputEntry,
+          trulden.unity-utils.runtime
+        m_MethodName: OnMinusPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2802830782861832045
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +623,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2802830783420838428}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2499026773046811521}
+        m_TargetAssemblyTypeName: UnityUtils.Variables.Input.IntArrayVariableInputEntry,
+          trulden.unity-utils.runtime
+        m_MethodName: OnPlusPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2802830783806940223
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,7 +757,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2802830783806940219}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2499026773046811521}
+        m_TargetAssemblyTypeName: UnityUtils.Variables.Input.IntArrayVariableInputEntry,
+          trulden.unity-utils.runtime
+        m_MethodName: OnXPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2802830783856590763
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,7 +985,20 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2499026773046811521}
+        m_TargetAssemblyTypeName: UnityUtils.Variables.Input.IntArrayVariableInputEntry,
+          trulden.unity-utils.runtime
+        m_MethodName: OnEdit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}

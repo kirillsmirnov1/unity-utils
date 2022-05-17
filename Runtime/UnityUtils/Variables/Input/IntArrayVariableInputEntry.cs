@@ -16,5 +16,25 @@ namespace UnityUtils.Variables.Input
             _index = i;
             input.text = val.ToString();
         }
+
+        public void OnEdit(string str)
+        {
+            // TODO 
+        }
+        
+        public void OnPlusPressed()
+        {
+            // TODO
+        }
+        
+        public void OnMinusPressed()
+        {
+            // TODO
+        }
+        
+        public void OnXPressed()
+        {
+            // TODO
+        }
     }
 }
