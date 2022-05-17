@@ -26,13 +26,13 @@ namespace UnityUtils.Variables.Input
             variableName.text = variable.name;
             ReGenerateElements();
             Variable.OnChange += OnVariableChange;
-            Variable.OnEntryChange += OnEntryChange;
+            Variable.OnEntryChange += FillEntry;
         }
 
         private void OnDestroy()
         {
             Variable.OnChange -= OnVariableChange;
-            Variable.OnEntryChange -= OnEntryChange;
+            Variable.OnEntryChange -= FillEntry;
         }
 
         private void OnVariableChange(ArrayWrap<int> newVal)
@@ -52,12 +52,9 @@ namespace UnityUtils.Variables.Input
             for (int i = 0; i < Variable.Length; i++)
             {
                 var value = Variable[i];
-                _entries[i].Fill(this, i, value);
+                FillEntry(i, value);
             }
         }
-
-        private void OnEntryChange(int index, int value) 
-            => _entries[index].Fill(this, index, value);
 
         private void ReGenerateElements()
         {
@@ -72,9 +69,12 @@ namespace UnityUtils.Variables.Input
         private void InstantiateEntry(int i, int value)
         {
             var entry = Instantiate(entryPrefab, entryRoot);
-            entry.Fill(this, i, value);
+            FillEntry(i, value);
             _entries.Add(entry);
         }
+
+        private void FillEntry(int i, int value) 
+            => _entries[i].Fill(this, i, value);
 
         private void ClearElements()
         {
