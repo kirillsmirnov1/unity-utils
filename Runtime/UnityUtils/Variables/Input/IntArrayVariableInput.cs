@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityUtils.Extensions;
 
 namespace UnityUtils.Variables.Input
@@ -47,6 +48,7 @@ namespace UnityUtils.Variables.Input
                 Instantiate(entryPrefab, entryRoot)
                     .Fill(this, i, Variable[i]);
             }
+            this.DelayAction(0f, () => LayoutRebuilder.ForceRebuildLayoutImmediate(entryRoot));
         }
 
         private void ClearElements()
