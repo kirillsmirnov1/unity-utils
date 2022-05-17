@@ -1,44 +1,7 @@
-﻿using UnityUtils.Extensions;
-
-namespace UnityUtils.Variables.Input
+﻿namespace UnityUtils.Variables.Input
 {
     public class IntArrayVariableInput : ArrayVariableInput<int>
     {
-        public override void Fill(AVariable variable, VariableInputProfile profile)
-        {
-            base.Fill(variable, profile);
-            
-            Variable.OnChange += OnVariableChange;
-            Variable.OnEntryChange += FillEntry;
-        }
-
-        private void OnDestroy()
-        {
-            Variable.OnChange -= OnVariableChange;
-            Variable.OnEntryChange -= FillEntry;
-        }
-
-        private void OnVariableChange(ListWrap<int> newVal)
-        {
-            if (newVal.Length != Entries.Count)
-            {
-                ReGenerateElements();
-            }
-            else
-            {
-                FillElements();
-            }
-        }
-
-        private void FillElements()
-        {
-            for (int i = 0; i < Variable.Length; i++)
-            {
-                var value = Variable[i];
-                FillEntry(i, value);
-            }
-        }
-
         public void AddElement() 
             => Variable.Add(0);
 

@@ -24,6 +24,36 @@ namespace UnityUtils.Variables.Input
             base.Fill(variable, profile);
             Rect = GetComponent<RectTransform>();
             ReGenerateElements();
+            
+            Variable.OnChange += OnVariableChange;
+            Variable.OnEntryChange += FillEntry;
+        }
+        
+        protected virtual void OnDestroy()
+        {
+            Variable.OnChange -= OnVariableChange;
+            Variable.OnEntryChange -= FillEntry;
+        }
+        
+        private void OnVariableChange(ListWrap<T> newVal)
+        {
+            if (newVal.Length != Entries.Count)
+            {
+                ReGenerateElements();
+            }
+            else
+            {
+                FillElements();
+            }
+        }
+        
+        private void FillElements()
+        {
+            for (int i = 0; i < Variable.Length; i++)
+            {
+                var value = Variable[i];
+                FillEntry(i, value);
+            }
         }
         
         protected void ReGenerateElements()
