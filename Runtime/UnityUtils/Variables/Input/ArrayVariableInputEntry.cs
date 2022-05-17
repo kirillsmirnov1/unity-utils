@@ -9,13 +9,15 @@ namespace UnityUtils.Variables.Input
         protected ArrayVariableInput<T> Parent;
 
         private T _value;
+        private bool _initiated;
 
         protected T Value
         {
-            get => _value; // TODO init 
+            get => _value; 
             set
             {
-                if(value.Equals(_value)) return;
+                if(value.Equals(_value) && _initiated) return;
+                _initiated = true;
                 _value = value;
                 UpdateValueDisplay(_value);
             }
