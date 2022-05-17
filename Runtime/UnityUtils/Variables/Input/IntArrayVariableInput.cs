@@ -14,7 +14,7 @@ namespace UnityUtils.Variables.Input
         private List<IntArrayVariableInputEntry> _entries;
         private RectTransform _rect;
 
-        public override Type VariableType => typeof(ArrayWrap<int>);
+        public override Type VariableType => typeof(ListWrap<int>);
 
         protected new IntArrayVariable Variable
             => (IntArrayVariable) base.Variable;
@@ -35,7 +35,7 @@ namespace UnityUtils.Variables.Input
             Variable.OnEntryChange -= FillEntry;
         }
 
-        private void OnVariableChange(ArrayWrap<int> newVal)
+        private void OnVariableChange(ListWrap<int> newVal)
         {
             if (newVal.Length != _entries.Count)
             {

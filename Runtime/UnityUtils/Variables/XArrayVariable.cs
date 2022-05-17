@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 namespace UnityUtils.Variables
 {
     // [CreateAssetMenu(fileName = "New X Array Variable", menuName = "Variables/Array/X Array Variable", order = 0)]
-    public abstract class XArrayVariable<T> : XVariable<ArrayWrap<T>>
+    public abstract class XArrayVariable<T> : XVariable<ListWrap<T>>
     {
         /// <summary>
         /// index, new value

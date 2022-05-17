@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace UnityUtils.Extensions
 {
     [Serializable]
-    public class ArrayWrap<T>
+    public class ListWrap<T>
     {
         public List<T> data;
         public int Length => data.Count;
