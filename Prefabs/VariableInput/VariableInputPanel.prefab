@@ -161,3 +161,8 @@ MonoBehaviour:
     type: 3}
   intVarInput: {fileID: 1174162078942703328, guid: 5237175bac7e8dc48969a6288950c397,
     type: 3}
+  inputPrefabs:
+  - {fileID: 570755722395124876, guid: 0bd6c51e2399eef41b4a904dea287a94, type: 3}
+  - {fileID: 859775573, guid: 74b3d5ec8560b104c8765941717ec436, type: 3}
+  - {fileID: 3465216937432437116, guid: c84e530d37efd4042a56e25cd47933a3, type: 3}
+  - {fileID: 5726571392361667888, guid: 5237175bac7e8dc48969a6288950c397, type: 3}

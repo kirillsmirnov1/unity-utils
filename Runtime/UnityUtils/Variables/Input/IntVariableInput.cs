@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,6 +6,8 @@ namespace UnityUtils.Variables.Input
 {
     public class IntVariableInput : VariableInput
     {
+        public override Type VariableType => typeof(int);
+        
         [SerializeField] private protected InputField text;
 
         protected int IterationStep = 1;

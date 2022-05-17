@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,8 +6,10 @@ namespace UnityUtils.Variables.Input
 {
     public class BoolVariableInput : VariableInput
     {
+        public override Type VariableType => typeof(bool);
+        
         [SerializeField] private Toggle toggle;
-
+        
         private new BoolVariable Variable
             => (BoolVariable) base.Variable;
 

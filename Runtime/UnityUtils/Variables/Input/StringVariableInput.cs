@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UnityUtils.Variables.Input
 {
     public class StringVariableInput : VariableInput
     {
+        public override Type VariableType => typeof(string);
+    
         [SerializeField] private InputField text;
 
         private new StringVariable Variable 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityUtils.View;
 
@@ -6,6 +7,8 @@ namespace UnityUtils.Variables.Input
 {
     public abstract class VariableInput : ListViewEntry<AVariable>
     {
+        public abstract Type VariableType { get; }
+        
         [SerializeField] protected Text variableName;
         
         protected AVariable Variable;

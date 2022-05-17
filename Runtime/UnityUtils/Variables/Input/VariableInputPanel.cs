@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityUtils.View;
@@ -13,17 +14,28 @@ namespace UnityUtils.Variables.Input
         [Header("Debug Panel")]
         [SerializeField] private List<VariableWithProfile> variables;
         
-        [Header("Prefabs")] 
-        [SerializeField] private GameObject stringVarInput;
-        [SerializeField] private GameObject floatVarInput;
-        [SerializeField] private GameObject boolVarInput;
-        [SerializeField] private GameObject intVarInput;
+        [Header("Prefabs")]
+        [SerializeField] private VariableInput[] inputPrefabs;
 
-        // TODO prefabs
+        private Dictionary<Type, VariableInput> _inputPrefabs;
 
         protected override void OnValidate() { }
 
-        private void Start() => SetEntries(variables.Select(x => x.variable).ToList());
+        private void Start()
+        {
+            InitPrefabs();
+            SetEntries(variables.Select(x => x.variable).ToList());
+        }
+
+        private void InitPrefabs()
+        {
+            _inputPrefabs = new Dictionary<Type, VariableInput>();
+            for (int i = 0; i < inputPrefabs.Length; i++)
+            {
+                var prefab = inputPrefabs[i];
+                _inputPrefabs[prefab.VariableType] = prefab;
+            }
+        }
 
         protected override void CheckConsistency(List<AVariable> data)
         {
@@ -50,14 +62,9 @@ namespace UnityUtils.Variables.Input
             }
         }
 
-        private GameObject PickPrefab(AVariable variable) =>
-            variable switch
-            {
-                StringVariable _ => stringVarInput,
-                FloatVariable _ => floatVarInput,
-                BoolVariable _ => boolVarInput,
-                IntVariable _ => intVarInput,
-                _ => null
-            };
+        private VariableInput PickPrefab(AVariable variable) 
+            => _inputPrefabs.TryGetValue(variable.Type, out var prefab) 
+                ? prefab 
+                : null;
     }
 }

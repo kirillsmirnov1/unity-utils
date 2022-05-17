@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UnityUtils.Variables.Input
 {
     public class FloatVariableInput : VariableInput
     {
+        public override Type VariableType => typeof(float);
+        
         [SerializeField] protected InputField text;
         
         protected int DigitsAfterDot = 2;
