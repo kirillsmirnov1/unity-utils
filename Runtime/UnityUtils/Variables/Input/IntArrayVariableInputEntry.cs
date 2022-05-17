@@ -9,12 +9,14 @@ namespace UnityUtils.Variables.Input
         
         private int _index;
         private IntArrayVariableInput _parent;
+        public int Value { get; private set; }
         
         public void Fill(IntArrayVariableInput parent, int i, int val)
         {
             _parent = parent;
             _index = i;
-            input.text = val.ToString();
+            Value = val;
+            input.text = Value.ToString();
         }
 
         public void OnEdit(string str) 
