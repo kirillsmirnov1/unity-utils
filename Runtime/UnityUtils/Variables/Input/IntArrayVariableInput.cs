@@ -35,7 +35,23 @@ namespace UnityUtils.Variables.Input
 
         private void OnVariableChange(ArrayWrap<int> newVal)
         {
-            ReGenerateElements();
+            if (newVal.Length != _entries.Count)
+            {
+                ReGenerateElements();
+            }
+            else
+            {
+                FillElements();
+            }
+        }
+
+        private void FillElements()
+        {
+            for (int i = 0; i < Variable.Length; i++)
+            {
+                var value = Variable[i];
+                _entries[i].Fill(this, i, value);
+            }
         }
 
         private void OnEntryChange(int index, int value)

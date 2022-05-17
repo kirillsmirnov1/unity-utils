@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UnityUtils.Variables.Input
@@ -9,12 +10,14 @@ namespace UnityUtils.Variables.Input
         
         private int _index;
         private IntArrayVariableInput _parent;
-        public int Value { get; private set; }
+        private int Value { get; set; } = Int32.MinValue;
         
         public void Fill(IntArrayVariableInput parent, int i, int val)
         {
             _parent = parent;
             _index = i;
+            
+            if(Value == val) return;
             Value = val;
             input.text = Value.ToString();
         }
