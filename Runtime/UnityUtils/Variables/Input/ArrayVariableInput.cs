@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityUtils.Extensions;
 
 namespace UnityUtils.Variables.Input
 {
     public abstract class ArrayVariableInput<T> : VariableInput
     {
+        protected new XArrayVariable<T> Variable
+            => (XArrayVariable<T>) base.Variable;
+        
         public override Type VariableType => typeof(ListWrap<T>);
         
         [SerializeField] protected ArrayVariableInputEntry<T> entryPrefab;
@@ -19,7 +23,37 @@ namespace UnityUtils.Variables.Input
         {
             base.Fill(variable, profile);
             Rect = GetComponent<RectTransform>();
+            ReGenerateElements();
         }
+        
+        protected void ReGenerateElements()
+        {
+            ClearElements();
+            for (int i = 0; i < Variable.Length; i++)
+            {
+                InstantiateEntry(i, Variable[i]);
+            }
+            ReBuildLayout();
+        }
+
+        private void ClearElements()
+        {
+            for (int i = entryRoot.childCount - 1; i >= 0; i--)
+            {
+                Destroy(entryRoot.GetChild(i).gameObject);
+            }
+            Entries = new List<ArrayVariableInputEntry<T>>();
+        }
+
+        private void InstantiateEntry(int i, T value)
+        {
+            var entry = Instantiate(entryPrefab, entryRoot);
+            Entries.Add(entry);
+            FillEntry(i, value);
+        }
+        
+        private void ReBuildLayout() 
+            => this.DelayAction(0f, () => LayoutRebuilder.ForceRebuildLayoutImmediate(Rect));
         
         protected void FillEntry(int i, T value) 
             => Entries[i].Fill(this, Profile, i, value);

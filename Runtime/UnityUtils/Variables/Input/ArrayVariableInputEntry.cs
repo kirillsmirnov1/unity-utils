@@ -6,13 +6,13 @@ namespace UnityUtils.Variables.Input
     {
         protected int Index;
         protected VariableInputProfile Profile;
-        protected ArrayVariableInput<T> Parent; // TODO move up 
+        protected ArrayVariableInput<T> Parent;
 
         private T _value;
 
         protected T Value
         {
-            get => _value;
+            get => _value; // TODO init 
             set
             {
                 if(value.Equals(_value)) return;
