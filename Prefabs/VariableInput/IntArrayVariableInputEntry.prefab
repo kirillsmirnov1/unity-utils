@@ -367,6 +367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2802830783079337380}
+  - component: {fileID: 2499026773046811521}
   m_Layer: 0
   m_Name: IntArrayVariableInputEntry
   m_TagString: Untagged
@@ -397,6 +398,19 @@ RectTransform:
   m_AnchoredPosition: {x: 535, y: -75}
   m_SizeDelta: {x: 1020, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2499026773046811521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2802830783079337387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44922433fd37443294d00138260207bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 2802830783990216062}
 --- !u!1 &2802830783341813030
 GameObject:
   m_ObjectHideFlags: 0

@@ -304,6 +304,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variableName: {fileID: 1292620713291190899}
-  entryPrefab: {fileID: 2802830783079337387, guid: c7ec7512b1a51d6439a61f792a1b9020,
+  entryPrefab: {fileID: 2499026773046811521, guid: c7ec7512b1a51d6439a61f792a1b9020,
     type: 3}
   entryRoot: {fileID: 1292620714012420830}

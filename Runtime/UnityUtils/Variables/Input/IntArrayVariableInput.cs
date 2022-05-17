@@ -6,7 +6,7 @@ namespace UnityUtils.Variables.Input
 {
     public class IntArrayVariableInput : VariableInput // TODO arrayVariableInput
     {
-        [SerializeField] private GameObject entryPrefab;
+        [SerializeField] private IntArrayVariableInputEntry entryPrefab;
         [SerializeField] private RectTransform entryRoot;
         
         public override Type VariableType => typeof(ArrayWrap<int>);
@@ -44,8 +44,8 @@ namespace UnityUtils.Variables.Input
             ClearElements();
             for (int i = 0; i < Variable.Length; i++)
             {
-                // TODO use real entry prefab 
-                Instantiate(entryPrefab, entryRoot);
+                Instantiate(entryPrefab, entryRoot)
+                    .Fill(this, i, Variable[i]);
             }
         }
 
