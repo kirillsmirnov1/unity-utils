@@ -85,16 +85,11 @@ namespace UnityUtils.Variables.Input
             _entries = new List<IntArrayVariableInputEntry>();
         }
 
-        public void AddElement()
-        {
-            Variable.Add(0);
-            ReBuildLayout();
-        }
+        public void AddElement() 
+            => Variable.Add(0);
 
-        public void RemoveElement(int index)
-        {
-            // TODO 
-        }
+        public void RemoveElement(int index) 
+            => Variable.RemoveAt(index);
 
         public void OnEntryEdit(int index, int value) 
             => Variable[index] = value;

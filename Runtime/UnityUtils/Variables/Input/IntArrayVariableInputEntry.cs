@@ -35,9 +35,7 @@ namespace UnityUtils.Variables.Input
             // TODO
         }
         
-        public void OnXPressed()
-        {
-            // TODO
-        }
+        public void OnXPressed() 
+            => _parent.RemoveElement(_index);
     }
 }

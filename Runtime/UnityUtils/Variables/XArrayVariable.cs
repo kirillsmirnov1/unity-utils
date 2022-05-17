@@ -43,6 +43,12 @@ namespace UnityUtils.Variables
             value.data.Add(val);
             OnDataChanged();
         }
+        
+        public void RemoveAt(int index)
+        {
+            value.data.RemoveAt(index);
+            OnDataChanged();
+        }
 
         public int Length => Value?.Count ?? 0;
         
