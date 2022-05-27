@@ -30,7 +30,7 @@ namespace UnityUtils
             else
             {
                 _instanceExists = true;
-                DontDestroyOnLoad(this);
+                DontDestroyOnLoad(gameObject);
                 for (var i = 0; i < transform.childCount; i++)
                 {
                     transform.GetChild(i).gameObject.SetActive(true);
