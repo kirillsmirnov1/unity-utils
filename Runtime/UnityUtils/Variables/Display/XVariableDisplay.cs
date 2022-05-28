@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
- namespace UnityUtils.Variables.Display
+namespace UnityUtils.Variables.Display
 {
     public abstract class XVariableDisplay <T> : MonoBehaviour
     {
@@ -17,12 +17,18 @@ using UnityEngine;
         protected virtual void Awake()
         {
             Text = GetComponentInChildren<TextMeshProUGUI>();
+        }
+
+        private void OnEnable()
+        {
+            SetText(variable);
             variable.OnChange += OnChange;
         }
 
-        protected virtual void OnDestroy() => variable.OnChange -= OnChange;
-
-        protected virtual void Start() => SetText(variable);
+        private void OnDisable()
+        {
+            variable.OnChange -= OnChange;   
+        }
 
         protected virtual void SetText(T value) => Text.text = $"{prefix}{string.Format(format, value)}{postfix}";
 
