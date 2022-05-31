@@ -7,16 +7,20 @@ namespace UnityUtils.Variables.Display
     {
 #pragma warning disable 0649
         [SerializeField] protected XVariable<T> variable;
+        
+        [Header("Formatting")]
         [SerializeField] protected string prefix;
         [SerializeField] protected string format = "{0}";
         [SerializeField] protected string postfix;
+        
+        [Header("Text fields")]
+        [SerializeField] protected TextMeshProUGUI valueText;
+        [SerializeField] protected TextMeshProUGUI nameText;
 #pragma warning restore 0649
-        
-        protected TextMeshProUGUI Text;
-        
-        protected virtual void Awake()
+
+        private void Start()
         {
-            Text = GetComponentInChildren<TextMeshProUGUI>();
+            nameText.text = variable.name;
         }
 
         private void OnEnable()
@@ -30,7 +34,7 @@ namespace UnityUtils.Variables.Display
             variable.OnChange -= OnChange;   
         }
 
-        protected virtual void SetText(T value) => Text.text = $"{prefix}{string.Format(format, value)}{postfix}";
+        protected virtual void SetText(T value) => valueText.text = $"{prefix}{string.Format(format, value)}{postfix}";
 
         protected virtual void OnChange(T value) => SetText(value);
     }
