@@ -20,6 +20,7 @@ namespace UnityUtils.Variables.Display
 
         private void Start()
         {
+            if(nameText == null) return;
             nameText.text = variable.name;
         }
 
