@@ -13,6 +13,11 @@ namespace UnityUtils.Variables.Input.XVarInput
         private new BoolVariable Variable
             => (BoolVariable) base.Variable;
 
+        private void OnEnable()
+        {
+            if(Variable != null) SetValue(Variable);
+        }
+
         private bool Value
         {
             get => Variable.Value;

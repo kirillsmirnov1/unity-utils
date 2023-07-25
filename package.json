@@ -1,6 +1,6 @@
 {
   "name": "trulden.unity-utils",
-  "version": "1.28.9",
+  "version": "1.28.10",
   "displayName": "Unity utils",
   "author": {
     "name": "Kirill Smirnov",
@@ -9,5 +9,6 @@
   },
   "dependencies": {
     "com.unity.textmeshpro": "2.1.1"
-  }
+  },
+  "description": "Useful utilities"
 }
