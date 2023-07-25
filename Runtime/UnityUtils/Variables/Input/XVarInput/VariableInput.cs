@@ -11,8 +11,8 @@ namespace UnityUtils.Variables.Input.XVarInput
         
         [SerializeField] protected Text variableName;
         
-        protected AVariable Variable;
-        protected VariableInputProfile Profile;
+        [SerializeField] protected AVariable Variable;
+        [SerializeField] protected VariableInputProfile Profile;
 
         public sealed override void Fill(AVariable data)
         {
