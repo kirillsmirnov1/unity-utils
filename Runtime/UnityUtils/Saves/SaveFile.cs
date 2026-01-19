@@ -10,11 +10,13 @@ namespace UnityUtils.Saves
     [CreateAssetMenu(menuName = "Variables/SaveFile", fileName = "new SaveFile", order = 0)]
     public class SaveFile : InitiatedScriptableObject
     {
+        [SerializeField] private string saveName;
         [SerializeField] private bool logSave;
         [SerializeField] private VariableReferencePair[] varRefs;
+        
+        private string SaveFileName => saveName;
 
         private readonly object _lockable = new object();
-        private string SaveFileName => name;
 
         public override void Init()
         {
